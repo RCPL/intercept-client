@@ -1,6 +1,6 @@
 {
   "name": "intercept-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Client library for interacting with the Intercept API.",
   "repository": {
     "type": "git",
@@ -29,9 +29,9 @@
     "clean": "rimraf lib dist es",
     "build": "npm run build:commonjs && npm run build:umd && npm run build:umd:min && npm run build:es",
     "build:watch": "echo 'build && watch the COMMONJS version of the package - for other version, run specific tasks' && npm run build:commonjs:watch",
-    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --copy-files ",
     "build:commonjs:watch": "npm run build:commonjs -- --watch",
-    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --copy-files ",
     "build:es:watch": "npm run build:es -- --watch",
     "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup src/index.js --config --sourcemap --output.file dist/intercept-client.js",
     "build:umd:watch": "npm run build:umd -- --watch",
