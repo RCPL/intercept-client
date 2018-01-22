@@ -2,11 +2,11 @@ import Orbit from '@orbit/data';
 import Store from '@orbit/store';
 import Coordinator, { RequestStrategy, SyncStrategy } from '@orbit/coordinator';
 import DrupalJSONAPISource from 'orbit-drupal';
+// eslint-disable-next-line no-unused-vars
+import isomorphicfetch from 'isomorphic-fetch';
 import schema from './schema';
 
-require('isomorphic-fetch');
-
-Orbit.fetch = fetch;
+Orbit.fetch = window.fetch || fetch;
 
 export class OrbitClient {
   constructor(settings) {
