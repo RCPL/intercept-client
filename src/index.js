@@ -6,7 +6,7 @@ import DrupalJSONAPISource from 'orbit-drupal';
 import isomorphicfetch from 'isomorphic-fetch';
 import schema from './schema';
 
-Orbit.fetch = window.fetch || fetch;
+Orbit.fetch = window.fetch.bind(window);
 
 export class OrbitClient {
   constructor(settings) {
