@@ -11,6 +11,50 @@ var interceptSchema = new OrbitSchemaFromOpenApi({
     client_secret: process.env.CLIENT_SECRET,
     username: process.env.USERNAME,
     password: process.env.PASSWORD
+  },
+  whitelist: {
+    resources: [
+      'evaluation_criteria:evaluation_criteria',
+      'file:file',
+      'event_recurrence:event_recurrence',
+      'media:file',
+      'media:image',
+      'media:slideshow',
+      'media:web_video',
+      'node:equipment',
+      'node:event',
+      'node:event_series',
+      'node:location',
+      'node:room',
+      'taxonomy_term:audience',
+      'taxonomy_term:equipment_type',
+      'taxonomy_term:evaluation_criteria',
+      'taxonomy_term:event_type',
+      'taxonomy_term:lc_subject',
+      'taxonomy_term:meeting_purpose',
+      'taxonomy_term:population_segment',
+      'taxonomy_term:room_type',
+      'taxonomy_term:tag',
+      'user:user'
+    ],
+  },
+  blacklist: {
+    attributes: [
+      'default_langcode',
+      'vid',
+      'langcode',
+      'revision_timestamp',
+      'revision_log',
+      'revision_created',
+      'revision_log_message',
+      'revision_translation_affected'
+    ],
+    relationships: [
+      'bundle',
+      'revision_uid',
+      'menu_link',
+      'revision_user'
+    ]
   }
 });
 

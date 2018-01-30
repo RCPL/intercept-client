@@ -1,179 +1,11 @@
 {
   "models": {
-    "block_content--basic": {
-      "attributes": {
-        "id": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "revision_id": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "info": {
-          "type": "string"
-        },
-        "revision_log": {
-          "type": "string"
-        },
-        "changed": {
-          "type": "number"
-        },
-        "revision_created": {
-          "type": "number"
-        },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
-        "body": {
-          "type": "object"
-        }
-      },
-      "relationships": {
-        "type": {
-          "type": "hasOne",
-          "model": "block_content_type--block_content_type"
-        },
-        "revision_user": {
-          "type": "hasOne",
-          "model": "user--user"
-        }
-      }
-    },
-    "consumer--consumer": {
-      "attributes": {
-        "id": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "label": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "third_party": {
-          "type": "boolean"
-        },
-        "secret": {
-          "type": "object"
-        },
-        "confidential": {
-          "type": "boolean"
-        }
-      },
-      "relationships": {
-        "owner_id": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "image": {
-          "type": "hasOne",
-          "model": "file--file"
-        },
-        "roles": {
-          "type": "hasMany",
-          "model": "user_role--user_role"
-        }
-      }
-    },
-    "contact_message--feedback": {
-      "attributes": {
-        "uuid": {
-          "type": "string"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "name": {
-          "type": "string"
-        },
-        "mail": {
-          "type": "string"
-        },
-        "subject": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "copy": {
-          "type": "boolean"
-        }
-      },
-      "relationships": {
-        "contact_form": {
-          "type": "hasOne",
-          "model": "contact_form--contact_form"
-        },
-        "recipient": {
-          "type": "hasOne",
-          "model": "user--user"
-        }
-      }
-    },
-    "contact_message--personal": {
-      "attributes": {
-        "uuid": {
-          "type": "string"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "name": {
-          "type": "string"
-        },
-        "mail": {
-          "type": "string"
-        },
-        "subject": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "copy": {
-          "type": "boolean"
-        }
-      },
-      "relationships": {
-        "contact_form": {
-          "type": "hasOne",
-          "model": "contact_form--contact_form"
-        },
-        "recipient": {
-          "type": "hasOne",
-          "model": "user--user"
-        }
-      }
-    },
     "evaluation_criteria--evaluation_criteria": {
       "attributes": {
         "id": {
           "type": "integer"
         },
         "uuid": {
-          "type": "string"
-        },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_created": {
-          "type": "number"
-        },
-        "revision_log_message": {
           "type": "string"
         },
         "text": {
@@ -190,19 +22,9 @@
         },
         "changed": {
           "type": "number"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
-        "default_langcode": {
-          "type": "boolean"
         }
       },
       "relationships": {
-        "revision_user": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "user_id": {
           "type": "hasOne",
           "model": "user--user"
@@ -216,9 +38,6 @@
         },
         "uuid": {
           "type": "string"
-        },
-        "langcode": {
-          "type": "object"
         },
         "filename": {
           "type": "string"
@@ -260,18 +79,6 @@
         "uuid": {
           "type": "string"
         },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_created": {
-          "type": "number"
-        },
-        "revision_log_message": {
-          "type": "string"
-        },
         "created": {
           "type": "number"
         },
@@ -280,10 +87,6 @@
         }
       },
       "relationships": {
-        "revision_user": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "user_id": {
           "type": "hasOne",
           "model": "user--user"
@@ -298,18 +101,6 @@
         "uuid": {
           "type": "string"
         },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_created": {
-          "type": "number"
-        },
-        "revision_log_message": {
-          "type": "string"
-        },
         "status": {
           "type": "boolean"
         },
@@ -322,25 +113,11 @@
         "changed": {
           "type": "number"
         },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
         "path": {
           "type": "object"
         }
       },
       "relationships": {
-        "bundle": {
-          "type": "hasOne",
-          "model": "media_type--media_type"
-        },
-        "revision_user": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "thumbnail": {
           "type": "hasOne",
           "model": "file--file"
@@ -363,18 +140,6 @@
         "uuid": {
           "type": "string"
         },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_created": {
-          "type": "number"
-        },
-        "revision_log_message": {
-          "type": "string"
-        },
         "status": {
           "type": "boolean"
         },
@@ -387,12 +152,6 @@
         "changed": {
           "type": "number"
         },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
         "path": {
           "type": "object"
         },
@@ -404,14 +163,6 @@
         }
       },
       "relationships": {
-        "bundle": {
-          "type": "hasOne",
-          "model": "media_type--media_type"
-        },
-        "revision_user": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "thumbnail": {
           "type": "hasOne",
           "model": "file--file"
@@ -434,18 +185,6 @@
         "uuid": {
           "type": "string"
         },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_created": {
-          "type": "number"
-        },
-        "revision_log_message": {
-          "type": "string"
-        },
         "status": {
           "type": "boolean"
         },
@@ -458,25 +197,11 @@
         "changed": {
           "type": "number"
         },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
         "path": {
           "type": "object"
         }
       },
       "relationships": {
-        "bundle": {
-          "type": "hasOne",
-          "model": "media_type--media_type"
-        },
-        "revision_user": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "thumbnail": {
           "type": "hasOne",
           "model": "file--file"
@@ -499,18 +224,6 @@
         "uuid": {
           "type": "string"
         },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_created": {
-          "type": "number"
-        },
-        "revision_log_message": {
-          "type": "string"
-        },
         "status": {
           "type": "boolean"
         },
@@ -523,12 +236,6 @@
         "changed": {
           "type": "number"
         },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
         "path": {
           "type": "object"
         },
@@ -540,14 +247,6 @@
         }
       },
       "relationships": {
-        "bundle": {
-          "type": "hasOne",
-          "model": "media_type--media_type"
-        },
-        "revision_user": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "thumbnail": {
           "type": "hasOne",
           "model": "file--file"
@@ -564,18 +263,6 @@
           "type": "integer"
         },
         "uuid": {
-          "type": "string"
-        },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_timestamp": {
-          "type": "number"
-        },
-        "revision_log": {
           "type": "string"
         },
         "status": {
@@ -596,12 +283,6 @@
         "sticky": {
           "type": "boolean"
         },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
         "path": {
           "type": "object"
         },
@@ -613,14 +294,6 @@
         }
       },
       "relationships": {
-        "type": {
-          "type": "hasOne",
-          "model": "node_type--node_type"
-        },
-        "revision_uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "uid": {
           "type": "hasOne",
           "model": "user--user"
@@ -643,18 +316,6 @@
         "uuid": {
           "type": "string"
         },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_timestamp": {
-          "type": "number"
-        },
-        "revision_log": {
-          "type": "string"
-        },
         "status": {
           "type": "boolean"
         },
@@ -671,12 +332,6 @@
           "type": "boolean"
         },
         "sticky": {
-          "type": "boolean"
-        },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
           "type": "boolean"
         },
         "path": {
@@ -708,14 +363,6 @@
         }
       },
       "relationships": {
-        "type": {
-          "type": "hasOne",
-          "model": "node_type--node_type"
-        },
-        "revision_uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "uid": {
           "type": "hasOne",
           "model": "user--user"
@@ -744,6 +391,10 @@
           "type": "hasOne",
           "model": "media--image"
         },
+        "field_location": {
+          "type": "hasOne",
+          "model": "node--location"
+        },
         "field_room": {
           "type": "hasOne",
           "model": "node--room"
@@ -758,18 +409,6 @@
         "uuid": {
           "type": "string"
         },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_timestamp": {
-          "type": "number"
-        },
-        "revision_log": {
-          "type": "string"
-        },
         "status": {
           "type": "boolean"
         },
@@ -788,25 +427,11 @@
         "sticky": {
           "type": "boolean"
         },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
         "path": {
           "type": "object"
         }
       },
       "relationships": {
-        "type": {
-          "type": "hasOne",
-          "model": "node_type--node_type"
-        },
-        "revision_uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "uid": {
           "type": "hasOne",
           "model": "user--user"
@@ -821,18 +446,6 @@
         "uuid": {
           "type": "string"
         },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_timestamp": {
-          "type": "number"
-        },
-        "revision_log": {
-          "type": "string"
-        },
         "status": {
           "type": "boolean"
         },
@@ -851,17 +464,14 @@
         "sticky": {
           "type": "boolean"
         },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
         "path": {
           "type": "object"
         },
         "field_address": {
           "type": "object"
+        },
+        "field_affiliated": {
+          "type": "boolean"
         },
         "field_contact_number": {
           "type": "string"
@@ -880,14 +490,6 @@
         }
       },
       "relationships": {
-        "type": {
-          "type": "hasOne",
-          "model": "node_type--node_type"
-        },
-        "revision_uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "uid": {
           "type": "hasOne",
           "model": "user--user"
@@ -895,72 +497,6 @@
         "field_image_primary": {
           "type": "hasOne",
           "model": "media--image"
-        }
-      }
-    },
-    "node--page": {
-      "attributes": {
-        "nid": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_timestamp": {
-          "type": "number"
-        },
-        "revision_log": {
-          "type": "string"
-        },
-        "status": {
-          "type": "boolean"
-        },
-        "title": {
-          "type": "string"
-        },
-        "created": {
-          "type": "number"
-        },
-        "changed": {
-          "type": "number"
-        },
-        "promote": {
-          "type": "boolean"
-        },
-        "sticky": {
-          "type": "boolean"
-        },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
-        "path": {
-          "type": "object"
-        },
-        "body": {
-          "type": "object"
-        }
-      },
-      "relationships": {
-        "type": {
-          "type": "hasOne",
-          "model": "node_type--node_type"
-        },
-        "revision_uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "uid": {
-          "type": "hasOne",
-          "model": "user--user"
         }
       }
     },
@@ -972,18 +508,6 @@
         "uuid": {
           "type": "string"
         },
-        "vid": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "revision_timestamp": {
-          "type": "number"
-        },
-        "revision_log": {
-          "type": "string"
-        },
         "status": {
           "type": "boolean"
         },
@@ -1002,12 +526,6 @@
         "sticky": {
           "type": "boolean"
         },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
         "path": {
           "type": "object"
         },
@@ -1017,11 +535,11 @@
         "field_capacity_min": {
           "type": "integer"
         },
-        "field_room_equipment": {
-          "type": "object"
-        },
         "field_room_fees": {
           "type": "object"
+        },
+        "field_room_standard_equipment": {
+          "type": "array"
         },
         "field_staff_use_only": {
           "type": "boolean"
@@ -1037,14 +555,6 @@
         }
       },
       "relationships": {
-        "type": {
-          "type": "hasOne",
-          "model": "node_type--node_type"
-        },
-        "revision_uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
         "uid": {
           "type": "hasOne",
           "model": "user--user"
@@ -1063,166 +573,6 @@
         }
       }
     },
-    "shortcut--default": {
-      "attributes": {
-        "id": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "title": {
-          "type": "string"
-        },
-        "weight": {
-          "type": "integer"
-        },
-        "link": {
-          "type": "object"
-        },
-        "default_langcode": {
-          "type": "boolean"
-        }
-      },
-      "relationships": {
-        "shortcut_set": {
-          "type": "hasOne",
-          "model": "shortcut_set--shortcut_set"
-        }
-      }
-    },
-    "oauth2_token--access_token": {
-      "attributes": {
-        "id": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        },
-        "created": {
-          "type": "number"
-        },
-        "changed": {
-          "type": "number"
-        },
-        "expire": {
-          "type": "number"
-        },
-        "status": {
-          "type": "boolean"
-        }
-      },
-      "relationships": {
-        "bundle": {
-          "type": "hasOne",
-          "model": "oauth2_token_type--oauth2_token_type"
-        },
-        "auth_user_id": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "client": {
-          "type": "hasOne",
-          "model": "consumer--consumer"
-        },
-        "scopes": {
-          "type": "hasMany",
-          "model": "user_role--user_role"
-        }
-      }
-    },
-    "oauth2_token--auth_code": {
-      "attributes": {
-        "id": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        },
-        "created": {
-          "type": "number"
-        },
-        "changed": {
-          "type": "number"
-        },
-        "expire": {
-          "type": "number"
-        },
-        "status": {
-          "type": "boolean"
-        }
-      },
-      "relationships": {
-        "bundle": {
-          "type": "hasOne",
-          "model": "oauth2_token_type--oauth2_token_type"
-        },
-        "auth_user_id": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "client": {
-          "type": "hasOne",
-          "model": "consumer--consumer"
-        },
-        "scopes": {
-          "type": "hasMany",
-          "model": "user_role--user_role"
-        }
-      }
-    },
-    "oauth2_token--refresh_token": {
-      "attributes": {
-        "id": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        },
-        "created": {
-          "type": "number"
-        },
-        "changed": {
-          "type": "number"
-        },
-        "expire": {
-          "type": "number"
-        },
-        "status": {
-          "type": "boolean"
-        }
-      },
-      "relationships": {
-        "bundle": {
-          "type": "hasOne",
-          "model": "oauth2_token_type--oauth2_token_type"
-        },
-        "auth_user_id": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "client": {
-          "type": "hasOne",
-          "model": "consumer--consumer"
-        },
-        "scopes": {
-          "type": "hasMany",
-          "model": "user_role--user_role"
-        }
-      }
-    },
     "taxonomy_term--audience": {
       "attributes": {
         "tid": {
@@ -1230,9 +580,6 @@
         },
         "uuid": {
           "type": "string"
-        },
-        "langcode": {
-          "type": "object"
         },
         "name": {
           "type": "string"
@@ -1246,18 +593,11 @@
         "changed": {
           "type": "number"
         },
-        "default_langcode": {
-          "type": "boolean"
-        },
         "path": {
           "type": "object"
         }
       },
       "relationships": {
-        "vid": {
-          "type": "hasOne",
-          "model": "taxonomy_vocabulary--taxonomy_vocabulary"
-        },
         "parent": {
           "type": "hasMany",
           "model": "taxonomy_term--taxonomy_term"
@@ -1272,9 +612,6 @@
         "uuid": {
           "type": "string"
         },
-        "langcode": {
-          "type": "object"
-        },
         "name": {
           "type": "string"
         },
@@ -1286,9 +623,6 @@
         },
         "changed": {
           "type": "number"
-        },
-        "default_langcode": {
-          "type": "boolean"
         },
         "path": {
           "type": "object"
@@ -1313,9 +647,6 @@
         "uuid": {
           "type": "string"
         },
-        "langcode": {
-          "type": "object"
-        },
         "name": {
           "type": "string"
         },
@@ -1327,9 +658,6 @@
         },
         "changed": {
           "type": "number"
-        },
-        "default_langcode": {
-          "type": "boolean"
         },
         "path": {
           "type": "object"
@@ -1357,9 +685,6 @@
         "uuid": {
           "type": "string"
         },
-        "langcode": {
-          "type": "object"
-        },
         "name": {
           "type": "string"
         },
@@ -1371,9 +696,6 @@
         },
         "changed": {
           "type": "number"
-        },
-        "default_langcode": {
-          "type": "boolean"
         },
         "path": {
           "type": "object"
@@ -1401,9 +723,6 @@
         "uuid": {
           "type": "string"
         },
-        "langcode": {
-          "type": "object"
-        },
         "name": {
           "type": "string"
         },
@@ -1415,9 +734,6 @@
         },
         "changed": {
           "type": "number"
-        },
-        "default_langcode": {
-          "type": "boolean"
         },
         "path": {
           "type": "object"
@@ -1442,9 +758,6 @@
         "uuid": {
           "type": "string"
         },
-        "langcode": {
-          "type": "object"
-        },
         "name": {
           "type": "string"
         },
@@ -1456,9 +769,6 @@
         },
         "changed": {
           "type": "number"
-        },
-        "default_langcode": {
-          "type": "boolean"
         },
         "path": {
           "type": "object"
@@ -1483,9 +793,6 @@
         "uuid": {
           "type": "string"
         },
-        "langcode": {
-          "type": "object"
-        },
         "name": {
           "type": "string"
         },
@@ -1497,9 +804,6 @@
         },
         "changed": {
           "type": "number"
-        },
-        "default_langcode": {
-          "type": "boolean"
         },
         "path": {
           "type": "object"
@@ -1524,9 +828,6 @@
         "uuid": {
           "type": "string"
         },
-        "langcode": {
-          "type": "object"
-        },
         "name": {
           "type": "string"
         },
@@ -1538,9 +839,6 @@
         },
         "changed": {
           "type": "number"
-        },
-        "default_langcode": {
-          "type": "boolean"
         },
         "path": {
           "type": "object"
@@ -1565,9 +863,6 @@
         "uuid": {
           "type": "string"
         },
-        "langcode": {
-          "type": "object"
-        },
         "name": {
           "type": "string"
         },
@@ -1579,9 +874,6 @@
         },
         "changed": {
           "type": "number"
-        },
-        "default_langcode": {
-          "type": "boolean"
         },
         "path": {
           "type": "object"
@@ -1605,9 +897,6 @@
         },
         "uuid": {
           "type": "string"
-        },
-        "langcode": {
-          "type": "object"
         },
         "preferred_langcode": {
           "type": "object"
@@ -1645,249 +934,14 @@
         "init": {
           "type": "string"
         },
-        "default_langcode": {
-          "type": "boolean"
+        "path": {
+          "type": "object"
         }
       },
       "relationships": {
         "roles": {
           "type": "hasMany",
           "model": "user_role--user_role"
-        }
-      }
-    },
-    "menu_link_content--menu_link_content": {
-      "attributes": {
-        "id": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "bundle": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "menu_name": {
-          "type": "string"
-        },
-        "link": {
-          "type": "object"
-        },
-        "external": {
-          "type": "boolean"
-        },
-        "rediscover": {
-          "type": "boolean"
-        },
-        "weight": {
-          "type": "integer"
-        },
-        "expanded": {
-          "type": "boolean"
-        },
-        "enabled": {
-          "type": "boolean"
-        },
-        "parent": {
-          "type": "string"
-        },
-        "changed": {
-          "type": "number"
-        },
-        "default_langcode": {
-          "type": "boolean"
-        }
-      }
-    },
-    "paragraph--stories_image": {
-      "attributes": {
-        "id": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "revision_id": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "status": {
-          "type": "boolean"
-        },
-        "created": {
-          "type": "number"
-        },
-        "parent_id": {
-          "type": "string"
-        },
-        "parent_type": {
-          "type": "string"
-        },
-        "parent_field_name": {
-          "type": "string"
-        },
-        "behavior_settings": {
-          "type": "string"
-        },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
-        "field_stories_alignment": {
-          "type": "string"
-        }
-      },
-      "relationships": {
-        "type": {
-          "type": "hasOne",
-          "model": "paragraphs_type--paragraphs_type"
-        },
-        "uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "revision_uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "field_stories_image": {
-          "type": "hasOne",
-          "model": "media--image"
-        }
-      }
-    },
-    "paragraph--stories_slideshow": {
-      "attributes": {
-        "id": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "revision_id": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "status": {
-          "type": "boolean"
-        },
-        "created": {
-          "type": "number"
-        },
-        "parent_id": {
-          "type": "string"
-        },
-        "parent_type": {
-          "type": "string"
-        },
-        "parent_field_name": {
-          "type": "string"
-        },
-        "behavior_settings": {
-          "type": "string"
-        },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
-        "field_stories_alignment": {
-          "type": "string"
-        }
-      },
-      "relationships": {
-        "type": {
-          "type": "hasOne",
-          "model": "paragraphs_type--paragraphs_type"
-        },
-        "uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "revision_uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "field_stories_slideshow": {
-          "type": "hasOne",
-          "model": "media--slideshow"
-        }
-      }
-    },
-    "paragraph--stories_web_video": {
-      "attributes": {
-        "id": {
-          "type": "integer"
-        },
-        "uuid": {
-          "type": "string"
-        },
-        "revision_id": {
-          "type": "integer"
-        },
-        "langcode": {
-          "type": "object"
-        },
-        "status": {
-          "type": "boolean"
-        },
-        "created": {
-          "type": "number"
-        },
-        "parent_id": {
-          "type": "string"
-        },
-        "parent_type": {
-          "type": "string"
-        },
-        "parent_field_name": {
-          "type": "string"
-        },
-        "behavior_settings": {
-          "type": "string"
-        },
-        "default_langcode": {
-          "type": "boolean"
-        },
-        "revision_translation_affected": {
-          "type": "boolean"
-        },
-        "field_stories_alignment": {
-          "type": "string"
-        }
-      },
-      "relationships": {
-        "type": {
-          "type": "hasOne",
-          "model": "paragraphs_type--paragraphs_type"
-        },
-        "uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "revision_uid": {
-          "type": "hasOne",
-          "model": "user--user"
-        },
-        "field_stories_web_video": {
-          "type": "hasOne",
-          "model": "media--web_video"
         }
       }
     }
