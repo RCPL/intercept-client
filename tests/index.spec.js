@@ -12,6 +12,19 @@ const testClient = new InterceptClient({
   host: 'http://intercept.test'
 });
 
+const models = Object.keys(schema._models);
+const relationshipModels = models.reduce((modelList, resource) => {
+  const model = schema.getModel(resource);
+  // Get a list of
+  const relatedModels = Object.keys(model.relationships || {})
+  .map(rel => model.relationships[rel].model);
+
+  // Add related models to the list and ensure they are unique.
+  return modelList.concat(relatedModels.filter(relatedModel => {
+    return modelList.indexOf(relatedModel) < 0;
+  }));
+}, []);
+
 testClient.coordinator.activate();
 
 describe('Intercept Schema', () => {
@@ -22,6 +35,12 @@ describe('Intercept Schema', () => {
   resource_types.forEach(resource => {
     it(`has ${resource}`, () => {
       expect(schema.getModel(resource)).toBeInstanceOf(Object);
+    });
+  });
+
+  relationshipModels.forEach(relationshipModel => {
+    it(`Relationship ${relationshipModel} has matching model`, () => {
+      expect(schema.getModel(relationshipModel)).toBeInstanceOf(Object);
     });
   });
 });

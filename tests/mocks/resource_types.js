@@ -11,6 +11,7 @@ const resource_types = [
   'node--event_series',
   'node--location',
   'node--room',
+  'node_type--node_type',
   'taxonomy_term--audience',
   'taxonomy_term--equipment_type',
   'taxonomy_term--evaluation_criteria',

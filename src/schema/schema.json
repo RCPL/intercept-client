@@ -352,6 +352,9 @@
         "field_must_register": {
           "type": "boolean"
         },
+        "field_reservation_period": {
+          "type": "object"
+        },
         "field_text_content": {
           "type": "object"
         },
@@ -366,6 +369,10 @@
         "uid": {
           "type": "hasOne",
           "model": "user--user"
+        },
+        "field_event_audience": {
+          "type": "hasMany",
+          "model": "taxonomy_term--audience"
         },
         "field_event_recurrence": {
           "type": "hasOne",
@@ -432,6 +439,10 @@
         }
       },
       "relationships": {
+        "type": {
+          "type": "hasOne",
+          "model": "node_type--node_type"
+        },
         "uid": {
           "type": "hasOne",
           "model": "user--user"
@@ -490,6 +501,10 @@
         }
       },
       "relationships": {
+        "type": {
+          "type": "hasOne",
+          "model": "node_type--node_type"
+        },
         "uid": {
           "type": "hasOne",
           "model": "user--user"
@@ -600,7 +615,7 @@
       "relationships": {
         "parent": {
           "type": "hasMany",
-          "model": "taxonomy_term--taxonomy_term"
+          "model": "taxonomy_term--audience"
         }
       }
     },
@@ -629,13 +644,9 @@
         }
       },
       "relationships": {
-        "vid": {
-          "type": "hasOne",
-          "model": "taxonomy_vocabulary--taxonomy_vocabulary"
-        },
         "parent": {
           "type": "hasMany",
-          "model": "taxonomy_term--taxonomy_term"
+          "model": "taxonomy_term--equipment_type"
         }
       }
     },
@@ -667,13 +678,9 @@
         }
       },
       "relationships": {
-        "vid": {
-          "type": "hasOne",
-          "model": "taxonomy_vocabulary--taxonomy_vocabulary"
-        },
         "parent": {
           "type": "hasMany",
-          "model": "taxonomy_term--taxonomy_term"
+          "model": "taxonomy_term--evaluation_criteria"
         }
       }
     },
@@ -705,13 +712,9 @@
         }
       },
       "relationships": {
-        "vid": {
-          "type": "hasOne",
-          "model": "taxonomy_vocabulary--taxonomy_vocabulary"
-        },
         "parent": {
           "type": "hasMany",
-          "model": "taxonomy_term--taxonomy_term"
+          "model": "taxonomy_term--event_type"
         }
       }
     },
@@ -740,13 +743,9 @@
         }
       },
       "relationships": {
-        "vid": {
-          "type": "hasOne",
-          "model": "taxonomy_vocabulary--taxonomy_vocabulary"
-        },
         "parent": {
           "type": "hasMany",
-          "model": "taxonomy_term--taxonomy_term"
+          "model": "taxonomy_term--lc_subject"
         }
       }
     },
@@ -775,13 +774,9 @@
         }
       },
       "relationships": {
-        "vid": {
-          "type": "hasOne",
-          "model": "taxonomy_vocabulary--taxonomy_vocabulary"
-        },
         "parent": {
           "type": "hasMany",
-          "model": "taxonomy_term--taxonomy_term"
+          "model": "taxonomy_term--meeting_purpose"
         }
       }
     },
@@ -810,13 +805,9 @@
         }
       },
       "relationships": {
-        "vid": {
-          "type": "hasOne",
-          "model": "taxonomy_vocabulary--taxonomy_vocabulary"
-        },
         "parent": {
           "type": "hasMany",
-          "model": "taxonomy_term--taxonomy_term"
+          "model": "taxonomy_term--population_segment"
         }
       }
     },
@@ -845,13 +836,9 @@
         }
       },
       "relationships": {
-        "vid": {
-          "type": "hasOne",
-          "model": "taxonomy_vocabulary--taxonomy_vocabulary"
-        },
         "parent": {
           "type": "hasMany",
-          "model": "taxonomy_term--taxonomy_term"
+          "model": "taxonomy_term--room_type"
         }
       }
     },
@@ -880,13 +867,9 @@
         }
       },
       "relationships": {
-        "vid": {
-          "type": "hasOne",
-          "model": "taxonomy_vocabulary--taxonomy_vocabulary"
-        },
         "parent": {
           "type": "hasMany",
-          "model": "taxonomy_term--taxonomy_term"
+          "model": "taxonomy_term--tag"
         }
       }
     },
@@ -942,6 +925,29 @@
         "roles": {
           "type": "hasMany",
           "model": "user_role--user_role"
+        }
+      }
+    },
+    "node_type--node_type": {
+      "attributes": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "user_role--user_role": {
+      "attributes": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
         }
       }
     }

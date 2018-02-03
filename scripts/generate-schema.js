@@ -53,11 +53,56 @@ var interceptSchema = new OrbitSchemaFromOpenApi({
       'bundle',
       'revision_uid',
       'menu_link',
-      'revision_user'
+      'revision_user',
+      'vid'
     ]
+  },
+  alterRelationship: (resource, name, relationship) => {
+    let output = {
+      name,
+      relationship
+    };
+    switch (name) {
+      // Update the taxonomy relationship to point to the same model,
+      //  rather than the non-existent 'taxonomy_term--taxonomy_term'
+      case 'parent':
+        output.relationship.model = resource;
+        break;
+    }
+
+    return output;
   }
 });
 
+const additionalModels = {
+  "node_type--node_type": {
+    "attributes": {
+      "uuid": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string"
+      },
+    },
+  },
+  "user_role--user_role": {
+    "attributes": {
+      "uuid": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      }
+    },
+  },
+}
+
 interceptSchema.generate()
+  .then(schema => Object.assign({}, schema, {
+    models: Object.assign({}, schema.models, additionalModels)
+  }))
   .then(interceptSchema.writeToFile(filePath))
   .catch((err) => console.log(err));
