@@ -6,11 +6,11 @@ import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-es';
 
-var env = process.env.NODE_ENV
-var config = {
+const env = process.env.NODE_ENV;
+const config = {
   output: {
     format: 'umd',
-    name: 'OrbitDrupal'
+    name: 'interceptClient'
   },
   plugins: [
     nodeResolve({
@@ -21,28 +21,26 @@ var config = {
     }),
     json({}),
     babel({
-      exclude: [
-        'node_modules/**',
-        '*.json'
-      ]
+      exclude: ['node_modules/**', '*.json']
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env)
-    }),
+    })
   ]
-}
+};
 
 if (env === 'production') {
-  config.plugins.push(
-    uglify({
+  config.plugins.push(uglify(
+    {
       compress: {
         pure_getters: true,
         unsafe: true,
         unsafe_comps: true,
         warnings: false
       }
-    }, minify)
-  )
+    },
+    minify
+  ));
 }
 
-export default config
+export default config;

@@ -1,6 +1,6 @@
 {
   "name": "intercept-client",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Client library for interacting with the Intercept API.",
   "repository": {
     "type": "git",
@@ -56,6 +56,7 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-jest": "^22.1.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "cross-env": "^5.1.3",
@@ -63,7 +64,9 @@
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
+    "install": "^0.10.4",
     "jest": "^22.1.4",
+    "npm": "^5.6.0",
     "orbit-schema-from-openapi": "^1.1.1",
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.2",
@@ -82,6 +85,8 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.5",
     "redux": "^3.7.2",
+    "url": "^0.11.0",
+    "url-parse": "^1.2.0",
     "uuid": "^3.2.1"
   }
 }

@@ -7,8 +7,10 @@
           {
             "useBuiltIns": false
           }
-        ]
-      ]
+        ],
+        "babel-preset-es2015"
+      ],
+      "plugins": ["transform-object-rest-spread"]
     },
     "es": {
       "presets": [
@@ -19,7 +21,8 @@
             "modules": false
           }
         ]
-      ]
+      ],
+      "plugins": ["transform-object-rest-spread"]
     }
   }
 }
