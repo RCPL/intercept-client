@@ -1,4 +1,4 @@
-const resource_types = [
+const resourceTypes = [
   'evaluation_criteria--evaluation_criteria',
   'file--file',
   'event_recurrence--event_recurrence',
@@ -24,4 +24,4 @@ const resource_types = [
   'user--user'
 ];
 
-export default resource_types;
+export default resourceTypes;

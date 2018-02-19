@@ -1,5 +1,4 @@
-import { Schema } from '@orbit/data';
 import schemaDefinition from './schema.json';
 
-const schema = new Schema(schemaDefinition);
+const schema = schemaDefinition;
 export default schema;

@@ -1,9 +1,12 @@
-var filePath = './src/schema/schema.json';
+const mapValues = require('lodash/mapValues');
+// import { connect } from 'net';
 
-var dotenv = require('dotenv').config();
-var OrbitSchemaFromOpenApi = require('orbit-schema-from-openapi');
+const filePath = './src/schema/schema.json';
 
-var interceptSchema = new OrbitSchemaFromOpenApi({
+// const dotenv = require('dotenv').config();
+const OrbitSchemaFromOpenApi = require('orbit-schema-from-openapi');
+
+const interceptSchema = new OrbitSchemaFromOpenApi({
   base: process.env.DOMAIN,
   oauth: {
     grant_type: process.env.GRANT_TYPE,
@@ -36,7 +39,7 @@ var interceptSchema = new OrbitSchemaFromOpenApi({
       'taxonomy_term:room_type',
       'taxonomy_term:tag',
       'user:user'
-    ],
+    ]
   },
   blacklist: {
     attributes: [
@@ -58,7 +61,7 @@ var interceptSchema = new OrbitSchemaFromOpenApi({
     ]
   },
   alterRelationship: (resource, name, relationship) => {
-    let output = {
+    const output = {
       name,
       relationship
     };
@@ -68,41 +71,53 @@ var interceptSchema = new OrbitSchemaFromOpenApi({
       case 'parent':
         output.relationship.model = resource;
         break;
+      default:
+        break;
     }
 
     return output;
   }
 });
 
-const additionalModels = {
-  "node_type--node_type": {
-    "attributes": {
-      "uuid": {
-        "type": "string"
-      },
-      "name": {
-        "type": "string"
-      },
-      "type": {
-        "type": "string"
-      },
-    },
-  },
-  "user_role--user_role": {
-    "attributes": {
-      "uuid": {
-        "type": "string"
-      },
-      "name": {
-        "type": "string"
-      }
-    },
-  },
+// const additionalModels = {
+// "node_type--node_type": {
+//   "attributes": {
+//     "uuid": {
+//       "type": "string"
+//     },
+//     "name": {
+//       "type": "string"
+//     },
+//     "type": {
+//       "type": "string"
+//     },
+//   },
+// },
+// "user_role--user_role": {
+//   "attributes": {
+//     "uuid": {
+//       "type": "string"
+//     },
+//     "name": {
+//       "type": "string"
+//     }
+//   },
+// },
+// };
+
+function updateSchema(schema) {
+  const output = mapValues(schema.models, model => {
+    const relationships = model.relationships
+      ? mapValues(model.relationships, relationship =>
+        Object.assign({}, relationship, { type: 'relationship' }))
+      : {};
+    return Object.assign({}, model.attributes, relationships);
+  });
+  return output;
 }
 
-interceptSchema.generate()
-  .then(schema => Object.assign({}, schema, {
-    models: Object.assign({}, schema.models, additionalModels)
-  }))
+interceptSchema
+  .generate()
+  .then(updateSchema)
   .then(interceptSchema.writeToFile(filePath))
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));
