@@ -10,7 +10,10 @@ const env = process.env.NODE_ENV;
 const config = {
   output: {
     format: 'umd',
-    name: 'interceptClient'
+    name: 'interceptClient',
+    globals: {
+      redis: 'redis'
+    }
   },
   plugins: [
     nodeResolve({
@@ -26,7 +29,8 @@ const config = {
     replace({
       'process.env.NODE_ENV': JSON.stringify(env)
     })
-  ]
+  ],
+  external: ['redis']
 };
 
 if (env === 'production') {
