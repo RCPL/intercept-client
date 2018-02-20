@@ -3,6 +3,7 @@ export const CLEAR_ERRORS = 'intercept/CLEAR_ERRORS';
 export const EDIT = 'intercept/EDIT';
 export const FAILURE = 'intercept/FAILURE';
 export const MARK_DIRTY = 'intercept/MARK_DIRTY';
+export const PURGE = 'intercept/PURGE';
 export const RECEIVE = 'intercept/RECEIVE';
 export const RECEIVE_TRANSLATION = 'intercept/RECEIVE_TRANSLATION';
 export const REQUEST = 'intercept/REQUEST';

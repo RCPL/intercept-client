@@ -1449,6 +1449,15 @@ export function apiReducer(resource, mergeStrategy) {
             syncing: false,
             error: null
           };
+        case t.PURGE:
+          // Removes all locally stored items!
+          return {
+            ...state,
+            items: {},
+            syncing: false,
+            error: null,
+            updated: null
+          };
         case t.FAILURE:
           // Log failure remotely.
           return {

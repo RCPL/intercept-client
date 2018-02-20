@@ -15,16 +15,15 @@ export const receiveTranslation = actionCreator(
 
 export const failure = actionCreator(t.FAILURE, 'error', 'resource', 'id');
 
+// Removes all local items and resets API syncing state;
+export const purge = actionCreator(t.PURGE, 'resource');
+
+// Resets API syncing state;
 export const reset = actionCreator(t.RESET, 'resource');
 
 export const clearErrors = actionCreator(t.CLEAR_ERRORS, 'resource', 'id');
 
-export const setSaved = actionCreator(
-  t.SET_SAVED,
-  'value',
-  'resource',
-  'id'
-);
+export const setSaved = actionCreator(t.SET_SAVED, 'value', 'resource', 'id');
 
 export const markDirty = actionCreator(t.MARK_DIRTY, 'resource', 'id');
 
