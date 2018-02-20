@@ -4,6 +4,7 @@ import url from 'url';
 import { ApiManager } from './../src/util/ApiManager';
 import classModel from './mocks/classModel';
 import * as t from './../src/actionTypes';
+import mockState from './mocks/state.json';
 
 const testApi = new ApiManager({
   model: classModel,
@@ -165,7 +166,7 @@ describe('ApiManager', () => {
 });
 
 describe('api actions', () => {
-  const store = mockStore({});
+  const store = mockStore(mockState.payload[0]);
   const { resource } = testApi;
 
   afterEach(() => {

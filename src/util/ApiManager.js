@@ -1394,6 +1394,7 @@ export function apiReducer(resource, mergeStrategy) {
         t.RECEIVE_TRANSLATION,
         t.FAILURE,
         t.MARK_DIRTY,
+        t.PURGE,
         t.RESET,
         t.SET_TIMESTAMP,
         t.ADD,
