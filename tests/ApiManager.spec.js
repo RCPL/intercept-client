@@ -1,11 +1,17 @@
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import url from 'url';
 import { ApiManager } from './../src/util/ApiManager';
 import classModel from './mocks/classModel';
+import * as t from './../src/actionTypes';
 
-export const testApi = new ApiManager({
+const testApi = new ApiManager({
   model: classModel,
   priority: 2
 });
+
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 describe('ApiManager', () => {
   it('instantiates', () => {
@@ -33,6 +39,11 @@ describe('ApiManager', () => {
       host: '/',
       pathname: 'jsonapi/node/classroom'
     }));
+  });
+
+  it('can purge', () => {
+    expect(testApi.purge).toBeInstanceOf(Function);
+    expect(testApi.purge()).toBeInstanceOf(Function);
   });
 
   it('can apply filters', () => {
@@ -150,5 +161,36 @@ describe('ApiManager', () => {
       'filter[or-group][group][conjunction]': 'OR',
       'filter[or-group][group][memberOf]': 'and-group'
     });
+  });
+});
+
+describe('api actions', () => {
+  const store = mockStore({});
+  const { resource } = testApi;
+
+  afterEach(() => {
+    store.clearActions();
+  });
+
+  it('should dispatch RESET', () => {
+    store.dispatch(testApi.reset());
+    // Test if your store dispatched the expected actions
+    const actions = store.getActions();
+    const expectedPayload = {
+      resource,
+      type: t.RESET
+    };
+    expect(actions).toEqual([expectedPayload]);
+  });
+
+  it('should dispatch PURGE', () => {
+    store.dispatch(testApi.purge());
+    // Test if your store dispatched the expected actions
+    const actions = store.getActions();
+    const expectedPayload = {
+      resource,
+      type: t.PURGE
+    };
+    expect(actions).toEqual([expectedPayload]);
   });
 });

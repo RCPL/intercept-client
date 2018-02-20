@@ -828,6 +828,15 @@ export const ApiManager = class {
     };
   }
 
+  // Purge local store
+  purge() {
+    const { resource } = this;
+
+    return dispatch => {
+      dispatch(a.purge(resource));
+    };
+  }
+
   // Reset API store
   reset() {
     const { resource } = this;
@@ -836,6 +845,7 @@ export const ApiManager = class {
       dispatch(a.reset(resource));
     };
   }
+
 
   /**
    * Syncs data using either POST or PATCH based on the saved status of the entity.
