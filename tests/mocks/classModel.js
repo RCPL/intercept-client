@@ -1,4 +1,4 @@
-import { EntityModel } from './../../src/lib/EntityModel';
+import { EntityModel } from './../../src/util/EntityModel';
 import classSchema from './classSchema';
 
 const classModel = new EntityModel('node', 'classroom', classSchema);

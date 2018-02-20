@@ -1,5 +1,5 @@
 import mapValues from 'lodash/mapValues';
-import Model from './lib/EntityModel';
+import Model from './util/EntityModel';
 import schema from './schema/schema.json';
 
 const models = mapValues(schema, (model, resource) =>

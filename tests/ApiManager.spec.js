@@ -1,5 +1,5 @@
 import url from 'url';
-import { ApiManager } from './../src/lib/ApiManager';
+import { ApiManager } from './../src/util/ApiManager';
 import classModel from './mocks/classModel';
 
 export const testApi = new ApiManager({

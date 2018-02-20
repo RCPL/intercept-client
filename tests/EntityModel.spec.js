@@ -1,4 +1,4 @@
-import { EntityModel } from './../src/lib/EntityModel';
+import { EntityModel } from './../src/util/EntityModel';
 import classModel from './mocks/classModel';
 
 describe('EntityModel', () => {

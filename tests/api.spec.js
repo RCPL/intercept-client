@@ -1,4 +1,4 @@
-import { ApiManager } from './../src/lib/ApiManager';
+import { ApiManager } from './../src/util/ApiManager';
 import api from './../src/api';
 
 describe('api', () => {

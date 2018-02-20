@@ -1,5 +1,5 @@
 import mapValues from 'lodash/mapValues';
-import { ApiManager } from './lib/ApiManager';
+import { ApiManager } from './util/ApiManager';
 import models from './models';
 
 const api = mapValues(models, (model) =>

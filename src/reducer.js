@@ -1,6 +1,6 @@
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
-import { apiReducer } from './lib/ApiManager';
+import { apiReducer } from './util/ApiManager';
 import schema from './schema/schema.json';
 
 // Add JSON_API resources to this list to create reducers.

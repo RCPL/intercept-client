@@ -1,4 +1,4 @@
-import actionCreator from './lib/actionCreator';
+import actionCreator from './util/actionCreator';
 import * as t from './actionTypes';
 
 export const request = actionCreator(t.REQUEST, 'resource', 'id');
