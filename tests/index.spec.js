@@ -6,5 +6,7 @@ describe('module', () => {
     expect(interceptClient).toHaveProperty('constants');
     expect(interceptClient).toHaveProperty('actions');
     expect(interceptClient).toHaveProperty('reducer');
+    expect(interceptClient).toHaveProperty('api');
+    expect(interceptClient).toHaveProperty('models');
   });
 });
