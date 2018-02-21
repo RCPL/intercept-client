@@ -2,13 +2,15 @@ import Bottleneck from 'bottleneck';
 import assign from 'lodash/assign';
 import filter from 'lodash/filter';
 import forEach from 'lodash/forEach';
+import groupBy from 'lodash/groupBy';
 import mapValues from 'lodash/mapValues';
 import reduce from 'lodash/reduce';
 import * as a from './../actions';
 import * as t from './../actionTypes';
 import exponentialBackoff from './exponentialBackoff';
+import { modelRegistrar } from './EntityModel';
 
-// Logger
+// Registrar
 import Registrar from './Registrar';
 
 // Logger
@@ -210,6 +212,24 @@ export function handleFailedResponse(resp, request, dispatch, resource, uuid) {
 }
 
 /**
+ * Processes included resources, adding them to the store.
+ * @param {Function} dispatch
+ *   Redux dispatch function
+ * @returns {Function}
+ *   Accepts an array of included resource objects, groups them by resource type and
+ *   dispatches a receive action for each type.
+ */
+export function processIncludes(dispatch) {
+  return includes => {
+    const resources = groupBy(includes, record => record.type);
+    forEach(resources, (records, resource) => {
+      const model = modelRegistrar.get(resource);
+      dispatch(a.receive({ data: records.map(model.import) }, resource));
+    });
+  };
+}
+
+/**
  * Handles dispatching a successful API call's response.
  * @param  {Object}   resp     Response object instance.
  * @param  {Function} dispatch Redux dispatch function.
@@ -230,9 +250,12 @@ export function handleSuccessResponse(resp, dispatch, resource, model, uuid) {
       data: Array.isArray(data) ? data.map(model.import) : model.import(data)
     };
 
-    // @todo Handle transforming included resources.
     logger.log('network', output.data);
     logger.groupEnd('network', 'response');
+
+    if ('included' in json) {
+      processIncludes(dispatch)(json.included);
+    }
 
     return dispatch(a.receive(output, resource, uuid));
   });
@@ -415,7 +438,7 @@ export const ApiManager = class {
    */
   static getEndpointInclude(include) {
     // Set includes if they exist.
-    return { include: include.join(',') };
+    return Array.isArray(include) ? { include: include.join(',') } : {};
   }
 
   /**
@@ -440,12 +463,9 @@ export const ApiManager = class {
     const fields = this.constructor.getEndpointFields(options.fields || options.fields === null || this.fields || {});
 
     // Set include if they exist.
-    // @todo Remove this once the apiManager can handle included resources.
-    const include = {};
-    // @todo Uncomment this once the apiManager can handle included resources.
-    // const include = options.include
-    //   ? this.getEndpointInclude(options.include)
-    //   : {};
+    const include = options.include
+      ? this.constructor.getEndpointInclude(options.include)
+      : {};
 
     return assign(params, filters, fields, include);
   }
@@ -610,6 +630,7 @@ export const ApiManager = class {
     const { getRequest, getTimestamp } = this.constructor;
 
     const filters = options.filters || [];
+    const include = options.include || [];
     const _fetchAll = this.fetchAll.bind(this);
     const _fetchTranslations = this.fetchTranslations.bind(this);
 
@@ -628,7 +649,8 @@ export const ApiManager = class {
       const endpoint =
         options.endpoint ||
         this.getEndpoint({
-          filters
+          filters,
+          include
         });
 
       const request = getRequest(endpoint);
@@ -662,6 +684,10 @@ export const ApiManager = class {
                 );
                 logger.log('network', output.data);
                 logger.groupEnd('network', 'response');
+
+                if ('included' in json) {
+                  processIncludes(dispatch)(json.included);
+                }
 
                 dispatch(a.receive(output, resource));
 
@@ -845,7 +871,6 @@ export const ApiManager = class {
       dispatch(a.reset(resource));
     };
   }
-
 
   /**
    * Syncs data using either POST or PATCH based on the saved status of the entity.
