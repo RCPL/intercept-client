@@ -109,7 +109,10 @@ function updateSchema(schema) {
   const output = mapValues(schema.models, model => {
     const relationships = model.relationships
       ? mapValues(model.relationships, relationship =>
-        Object.assign({}, relationship, { type: 'relationship' }))
+        Object.assign({}, relationship, {
+          type: 'relationship',
+          multiple: relationship.type === 'hasMany',
+        }))
       : {};
     return Object.assign({}, model.attributes, relationships);
   });

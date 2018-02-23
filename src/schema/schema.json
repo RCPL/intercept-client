@@ -23,7 +23,8 @@
     },
     "user_id": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     }
   },
   "file--file": {
@@ -59,7 +60,8 @@
     },
     "uid": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     }
   },
   "event_recurrence--event_recurrence": {
@@ -77,7 +79,8 @@
     },
     "user_id": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     }
   },
   "media--file": {
@@ -104,15 +107,18 @@
     },
     "thumbnail": {
       "type": "relationship",
-      "model": "file--file"
+      "model": "file--file",
+      "multiple": false
     },
     "uid": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     },
     "field_media_file": {
       "type": "relationship",
-      "model": "file--file"
+      "model": "file--file",
+      "multiple": false
     }
   },
   "media--image": {
@@ -145,15 +151,18 @@
     },
     "thumbnail": {
       "type": "relationship",
-      "model": "file--file"
+      "model": "file--file",
+      "multiple": false
     },
     "uid": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     },
     "field_media_image": {
       "type": "relationship",
-      "model": "file--file"
+      "model": "file--file",
+      "multiple": false
     }
   },
   "media--slideshow": {
@@ -180,15 +189,18 @@
     },
     "thumbnail": {
       "type": "relationship",
-      "model": "file--file"
+      "model": "file--file",
+      "multiple": false
     },
     "uid": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     },
     "field_media_slideshow": {
       "type": "relationship",
-      "model": "media--image"
+      "model": "media--image",
+      "multiple": true
     }
   },
   "media--web_video": {
@@ -221,11 +233,13 @@
     },
     "thumbnail": {
       "type": "relationship",
-      "model": "file--file"
+      "model": "file--file",
+      "multiple": false
     },
     "uid": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     }
   },
   "node--equipment": {
@@ -264,19 +278,23 @@
     },
     "type": {
       "type": "relationship",
-      "model": "node_type--node_type"
+      "model": "node_type--node_type",
+      "multiple": false
     },
     "uid": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     },
     "field_equipment_type": {
       "type": "relationship",
-      "model": "taxonomy_term--equipment_type"
+      "model": "taxonomy_term--equipment_type",
+      "multiple": false
     },
     "field_image_primary": {
       "type": "relationship",
-      "model": "media--image"
+      "model": "media--image",
+      "multiple": false
     }
   },
   "node--event": {
@@ -336,47 +354,58 @@
     },
     "type": {
       "type": "relationship",
-      "model": "node_type--node_type"
+      "model": "node_type--node_type",
+      "multiple": false
     },
     "uid": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     },
     "field_event_audience": {
       "type": "relationship",
-      "model": "taxonomy_term--audience"
+      "model": "taxonomy_term--audience",
+      "multiple": true
     },
     "field_event_recurrence": {
       "type": "relationship",
-      "model": "event_recurrence--event_recurrence"
+      "model": "event_recurrence--event_recurrence",
+      "multiple": false
     },
     "field_event_series": {
       "type": "relationship",
-      "model": "node--event_series"
+      "model": "node--event_series",
+      "multiple": false
     },
     "field_event_subject_heading": {
       "type": "relationship",
-      "model": "taxonomy_term--lc_subject"
+      "model": "taxonomy_term--lc_subject",
+      "multiple": true
     },
     "field_event_tags": {
       "type": "relationship",
-      "model": "taxonomy_term--tag"
+      "model": "taxonomy_term--tag",
+      "multiple": true
     },
     "field_event_type": {
       "type": "relationship",
-      "model": "taxonomy_term--event_type"
+      "model": "taxonomy_term--event_type",
+      "multiple": true
     },
     "field_image_primary": {
       "type": "relationship",
-      "model": "media--image"
+      "model": "media--image",
+      "multiple": false
     },
     "field_location": {
       "type": "relationship",
-      "model": "node--location"
+      "model": "node--location",
+      "multiple": false
     },
     "field_room": {
       "type": "relationship",
-      "model": "node--room"
+      "model": "node--room",
+      "multiple": false
     }
   },
   "node--event_series": {
@@ -409,11 +438,13 @@
     },
     "type": {
       "type": "relationship",
-      "model": "node_type--node_type"
+      "model": "node_type--node_type",
+      "multiple": false
     },
     "uid": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     }
   },
   "node--location": {
@@ -467,15 +498,18 @@
     },
     "type": {
       "type": "relationship",
-      "model": "node_type--node_type"
+      "model": "node_type--node_type",
+      "multiple": false
     },
     "uid": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     },
     "field_image_primary": {
       "type": "relationship",
-      "model": "media--image"
+      "model": "media--image",
+      "multiple": false
     }
   },
   "node--room": {
@@ -532,23 +566,28 @@
     },
     "type": {
       "type": "relationship",
-      "model": "node_type--node_type"
+      "model": "node_type--node_type",
+      "multiple": false
     },
     "uid": {
       "type": "relationship",
-      "model": "user--user"
+      "model": "user--user",
+      "multiple": false
     },
     "field_image_primary": {
       "type": "relationship",
-      "model": "media--image"
+      "model": "media--image",
+      "multiple": false
     },
     "field_location": {
       "type": "relationship",
-      "model": "node--location"
+      "model": "node--location",
+      "multiple": false
     },
     "field_room_type": {
       "type": "relationship",
-      "model": "taxonomy_term--room_type"
+      "model": "taxonomy_term--room_type",
+      "multiple": false
     }
   },
   "taxonomy_term--audience": {
@@ -575,7 +614,8 @@
     },
     "parent": {
       "type": "relationship",
-      "model": "taxonomy_term--audience"
+      "model": "taxonomy_term--audience",
+      "multiple": true
     }
   },
   "taxonomy_term--equipment_type": {
@@ -602,7 +642,8 @@
     },
     "parent": {
       "type": "relationship",
-      "model": "taxonomy_term--equipment_type"
+      "model": "taxonomy_term--equipment_type",
+      "multiple": true
     }
   },
   "taxonomy_term--evaluation_criteria": {
@@ -632,7 +673,8 @@
     },
     "parent": {
       "type": "relationship",
-      "model": "taxonomy_term--evaluation_criteria"
+      "model": "taxonomy_term--evaluation_criteria",
+      "multiple": true
     }
   },
   "taxonomy_term--event_type": {
@@ -662,7 +704,8 @@
     },
     "parent": {
       "type": "relationship",
-      "model": "taxonomy_term--event_type"
+      "model": "taxonomy_term--event_type",
+      "multiple": true
     }
   },
   "taxonomy_term--lc_subject": {
@@ -689,7 +732,8 @@
     },
     "parent": {
       "type": "relationship",
-      "model": "taxonomy_term--lc_subject"
+      "model": "taxonomy_term--lc_subject",
+      "multiple": true
     }
   },
   "taxonomy_term--meeting_purpose": {
@@ -716,7 +760,8 @@
     },
     "parent": {
       "type": "relationship",
-      "model": "taxonomy_term--meeting_purpose"
+      "model": "taxonomy_term--meeting_purpose",
+      "multiple": true
     }
   },
   "taxonomy_term--population_segment": {
@@ -743,7 +788,8 @@
     },
     "parent": {
       "type": "relationship",
-      "model": "taxonomy_term--population_segment"
+      "model": "taxonomy_term--population_segment",
+      "multiple": true
     }
   },
   "taxonomy_term--room_type": {
@@ -770,7 +816,8 @@
     },
     "parent": {
       "type": "relationship",
-      "model": "taxonomy_term--room_type"
+      "model": "taxonomy_term--room_type",
+      "multiple": true
     }
   },
   "taxonomy_term--tag": {
@@ -797,7 +844,8 @@
     },
     "parent": {
       "type": "relationship",
-      "model": "taxonomy_term--tag"
+      "model": "taxonomy_term--tag",
+      "multiple": true
     }
   },
   "user--user": {
@@ -848,7 +896,8 @@
     },
     "roles": {
       "type": "relationship",
-      "model": "user_role--user_role"
+      "model": "user_role--user_role",
+      "multiple": true
     }
   }
 }

@@ -362,6 +362,7 @@ export const ApiManager = class {
       (query, value, key) => {
         const output = assign({}, query);
         const type = value.type || 'condition';
+        const multiOperators = ['IN', 'NOT IN', 'BETWEEN'];
         const useShorthand =
           'operator' in value === false &&
           'condition' in value === false &&
@@ -389,7 +390,14 @@ export const ApiManager = class {
 
         // Handle default
         output[`filter[${key}][condition][path]`] = value.path;
-        output[`filter[${key}][condition][value]`] = value.value;
+
+        // Handle multi-value operators.
+        if (multiOperators.indexOf(value.operator) > -1) {
+          output[`filter[${key}][condition][value][]`] = value.value;
+        }
+        else {
+          output[`filter[${key}][condition][value]`] = value.value;
+        }
 
         if ('operator' in value) {
           output[`filter[${key}][condition][operator]`] = value.operator;
@@ -768,7 +776,7 @@ export const ApiManager = class {
           filters: [].concat(options.filters, {
             path: 'langcode',
             value: options.langcode,
-            operater: '='
+            operator: '='
           })
         });
 
