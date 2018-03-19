@@ -641,6 +641,7 @@ export const ApiManager = class {
     const include = options.include || [];
     const _fetchAll = this.fetchAll.bind(this);
     const _fetchTranslations = this.fetchTranslations.bind(this);
+    let replace = options.replace || false;
 
     return (dispatch, getState) => {
       const state = getState();
@@ -683,7 +684,6 @@ export const ApiManager = class {
                   data: [].concat(json.data).map(model.import)
                 };
 
-                // @todo Handle transforming included resources.
                 logger.group('network', 'response');
                 logger.log(
                   'network',
@@ -693,8 +693,16 @@ export const ApiManager = class {
                 logger.log('network', output.data);
                 logger.groupEnd('network', 'response');
 
+                // Process included resources.
                 if ('included' in json) {
                   processIncludes(dispatch)(json.included);
+                }
+
+                // Purge store if replacing.
+                if (replace) {
+                  dispatch(a.purge(resource));
+                  // Ensure it only purges once.
+                  replace = false;
                 }
 
                 dispatch(a.receive(output, resource));
