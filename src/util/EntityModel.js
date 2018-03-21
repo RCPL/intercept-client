@@ -1,6 +1,4 @@
-import find from 'lodash/find';
 import findKey from 'lodash/findKey';
-import forEach from 'lodash/forEach';
 import keys from 'lodash/keys';
 import pickBy from 'lodash/pickBy';
 import uuid from 'uuid';
@@ -53,7 +51,6 @@ export const EntityModel = class {
     this.schema = schema;
     this.jsonApiSchema = new JsonApiSchema(resource, schema);
     this.model = new JsonApiModel(this.jsonApiSchema);
-    this.import = this.import.bind(this);
     this.getDependentFields = this.getDependentFields.bind(this);
     this.dependentFields = this.getDependentFields();
     this.getFields = this.getFields.bind(this);
@@ -66,11 +63,14 @@ export const EntityModel = class {
    * @return {Object}      Standard entity formatted data.
    */
   static create(data) {
-    const id = data.uuid || uuid.v4();
+    const id = data.attributes.uuid || uuid.v4();
+    const mergedData = Object.assign({}, data);
+    mergedData.attributes = mergedData.attributes || {};
+    mergedData.attributes.uuid = id;
 
     return {
       id,
-      data: Object.assign({}, data, { uuid: id }),
+      data: mergedData,
       state: {
         saved: false, // Exists remotely.
         syncing: null, // Request sent, response not yet received
@@ -104,7 +104,9 @@ export const EntityModel = class {
   getFields(useAlias) {
     const { schema } = this;
     const fields = Object.keys(schema);
-    return !useAlias ? fields : fields.map(field => schema[field].alias || field);
+    return !useAlias
+      ? fields
+      : fields.map(field => schema[field].alias || field);
   }
 
   /**
@@ -158,31 +160,11 @@ export const EntityModel = class {
 
   /**
    * Converts JSON_API formated Entity into a plain object.
-   * @param  {Object} entity JSON_API formated object
+   * @param  {Object} entity JSON_API formatted object
    * @return {Object}        Plain object representation of the data.
    */
-  import(entity) {
-    if (!entity) {
-      return {};
-    }
-
-    const { model } = this;
-    // Set the models data property to match the entity's
-    model._data = entity;
-
-    const data = {};
-
-    // Set each prop listed in the schema.
-    forEach(this.schema, (value, key) => {
-      const prop = value.alias ? value.alias : key;
-
-      // Translations is a special property that does not map to a field.
-      if (prop !== 'translations') {
-        data[prop] = model[prop];
-      }
-    });
-
-    return data;
+  static import(entity) {
+    return entity;
   }
 
   /**
@@ -190,48 +172,20 @@ export const EntityModel = class {
    * @param  {Object} entity Plain object representation of the data.
    * @return {Object}        JSON_API formatted object
    */
-  export(entity) {
-    const model = new JsonApiModel(this.jsonApiSchema);
+  static export(entity) {
+    // const model = new JsonApiModel(this.jsonApiSchema);
 
-    // Set each prop.
-    forEach(entity.data, (value, key) => {
-      // Ignore created and changed date.
-      const ignoredFields = ['created', 'changed', 'nid', 'tid', 'id'];
-      if (ignoredFields.includes(key)) {
-        return;
-      }
+    const data = Object.assign({}, entity);
+    const ignoredAttributes = ['created', 'changed', 'nid', 'tid', 'id'];
+    const ignoredRelationships = ['node_type'];
 
-      const field =
-        key in this.jsonApiSchema.schema
-          ? this.jsonApiSchema.schema[key]
-          : find(this.jsonApiSchema.schema, s => s.alias === key);
-      // @todo Remove this workaround once https://www.drupal.org/node/2790257 is fixed.
-      // The following workaround loads the replaces the uuid on relationships with
-      // the appropriate Drupal ID.
-
-      if (field) {
-        if (field.type !== 'relationship') {
-          // If it's not a relationship, use the value as is.
-          model[key] = value;
-        }
-        else if (field.multiple) {
-          // If it is a relationship, the value is a uuid
-          // use the uuid to get the data.id  (drupal id) of the entity
-          // Ignore the key if there are no values.
-          // Remove null values.
-          const result = value.filter(v => v);
-          if (result.length > 0) {
-            model[key] = result;
-          }
-        }
-        else if (value) {
-          model[key] = value;
-        }
-      }
+    ignoredAttributes.forEach(prop => {
+      delete data.attributes[prop];
     });
 
-    const data = model._data;
-    data.id = model.uuid;
+    ignoredRelationships.forEach(prop => {
+      delete data.relationships[prop];
+    });
 
     return {
       data

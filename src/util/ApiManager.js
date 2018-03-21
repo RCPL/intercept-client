@@ -8,7 +8,7 @@ import reduce from 'lodash/reduce';
 import * as a from './../actions';
 import * as t from './../actionTypes';
 import exponentialBackoff from './exponentialBackoff';
-import { modelRegistrar } from './EntityModel';
+import { EntityModel } from './EntityModel';
 
 // Registrar
 import Registrar from './Registrar';
@@ -223,8 +223,7 @@ export function processIncludes(dispatch) {
   return includes => {
     const resources = groupBy(includes, record => record.type);
     forEach(resources, (records, resource) => {
-      const model = modelRegistrar.get(resource);
-      dispatch(a.receive({ data: records.map(model.import) }, resource));
+      dispatch(a.receive({ data: records.map(EntityModel.import) }, resource));
     });
   };
 }
@@ -247,7 +246,7 @@ export function handleSuccessResponse(resp, dispatch, resource, model, uuid) {
     const data = 'data' in json ? json.data : json;
 
     const output = {
-      data: Array.isArray(data) ? data.map(model.import) : model.import(data)
+      data: Array.isArray(data) ? data.map(EntityModel.import) : EntityModel.import(data)
     };
 
     logger.log('network', output.data);
@@ -318,12 +317,11 @@ export const ApiManager = class {
     this.fetchTranslations = this.fetchTranslations.bind(this);
     this.sync = this.sync.bind(this);
     this.updateRelationshipsIfNeeded = this.updateRelationshipsIfNeeded.bind(this);
-    this.fetchTimestamp = this.fetchTimestamp.bind(this);
     this.backoffFetch = this.backoffFetch.bind(this);
     this.wrapFetch = this.wrapFetch.bind(this);
 
     // Register this instance.
-    apiRegistrar.register(options.resource, this);
+    apiRegistrar.register(model.resource, this);
   }
 
   /**
@@ -609,20 +607,8 @@ export const ApiManager = class {
     return new Request(endpoint, requestOptions);
   }
 
-  fetchTimestamp() {
-    const { wrapFetch, getTimestampEndpoint } = this;
-    const { getRequest } = this.constructor;
-    const endpoint = getTimestampEndpoint();
-
-    const request = getRequest(endpoint, {
-      Accept: 'application/json'
-    });
-
-    return exponentialBackoff(wrapFetch(request, responseHandler, errorHandler))
-      .then(resp => resp.json().then(json => json.timestamp))
-      .catch(err => {
-        logger.log(err);
-      });
+  static fetchTimestamp() {
+    return Promise.resolve(Math.floor(new Date().getTime() / 1000));
   }
 
   /**
@@ -630,11 +616,14 @@ export const ApiManager = class {
    * @param {Object} options
    */
   fetchAll(options = {}) {
-    // on successful JSON response, map data to this.model.import
+    // on successful JSON response, map data to this.EntityModel.import
     // then dispatch success, type, data (transformed data)
     const {
-      backoffFetch, model, fetchTimestamp, resource
+      backoffFetch, model, resource
     } = this;
+    const {
+      fetchTimestamp
+    } = this.constructor;
     const { getRequest, getTimestamp } = this.constructor;
 
     const filters = options.filters || [];
@@ -662,7 +651,7 @@ export const ApiManager = class {
           include
         });
 
-      const request = getRequest(endpoint);
+      const request = getRequest(endpoint, options);
 
       // Dispatch generic api request action.
       dispatch(a.request(resource));
@@ -681,7 +670,7 @@ export const ApiManager = class {
             if (resp.ok) {
               resp.json().then(json => {
                 const output = {
-                  data: [].concat(json.data).map(model.import)
+                  data: [].concat(json.data)
                 };
 
                 logger.group('network', 'response');
@@ -757,10 +746,10 @@ export const ApiManager = class {
 
   // Fetch related translations.
   fetchTranslations(options = {}) {
-    // on successful JSON response, map data to this.model.import
+    // on successful JSON response, map data to this.EntityModel.import
     // then dispatch success, type, data (transformed data)
     const {
-      backoffFetch, model, fields, include, resource, priority
+      backoffFetch, fields, include, resource, priority
     } = this;
     const { getRequest, getTimestamp } = this.constructor;
 
@@ -788,7 +777,7 @@ export const ApiManager = class {
           })
         });
 
-      const request = getRequest(endpoint);
+      const request = getRequest(endpoint, options);
 
       // Dispatch generic api request action.
       dispatch(a.request(resource));
@@ -802,7 +791,7 @@ export const ApiManager = class {
               if (resp.ok) {
                 resp.json().then(json => {
                   const output = {
-                    data: [].concat(json.data).map(model.import)
+                    data: [].concat(json.data).map(EntityModel.import)
                   };
 
                   // @todo Handle transforming included resources.
@@ -997,7 +986,7 @@ export const ApiManager = class {
       // Determine the HTTP method based on saved status.
       const method = saved ? 'PATCH' : 'POST';
       // Format for local entity data for jsonapi
-      const data = model.export(entity, state);
+      const data = EntityModel.export(entity, state);
 
       //
       // Create API endpoint string
@@ -1166,22 +1155,36 @@ function editItems(items, data) {
   return output;
 }
 
+function mergeProp(prop, x, y) {
+  if (x[prop] || y[prop]) {
+    return {
+      ...x[prop],
+      ...y[prop],
+    };
+  }
+}
+
 /**
  * Creates a new data item from an existing item, overriding data properties from an api response.
  * @param  {Object} item Existing item from the store
  * @param  {Object} data Data used to populate item.data.
  * @return {Object}      A new item with data and state properties populated.
  */
-function itemUpdate(item, data) {
-  const output = assign({}, item);
-  output.data = {
-    ...item.data,
-    ...data
-  };
+function itemUpdate(item, input) {
+  const output = Object.assign({}, item);
+
+  output.data = item.data || {};
+
+  output.data.attributes = mergeProp('attributes', item.data, input);
+  output.data.relationships = mergeProp('relationships', item.data, input);
+  output.data.meta = mergeProp('meta', item.data, input);
+  output.data.links = mergeProp('links', item.data, input);
+
   output.state = {
     ...item.state,
-    saved: true
+    saved: true,
   };
+
   return output;
 }
 
@@ -1221,11 +1224,11 @@ function mergeItem(items, data, mergeStrategy) {
   switch (mergeStrategy) {
     case 'mergeNew':
       // Only add new items.
-      return data.uuid in items ? items[data.uuid] : itemImport(data);
+      return data.id in items ? items[data.id] : itemImport(data);
     default:
       // Update existing items.
-      return data.uuid in items
-        ? itemUpdate(items[data.uuid], data)
+      return data.id in items
+        ? itemUpdate(items[data.id], data)
         : itemImport(data);
   }
 }
@@ -1242,7 +1245,7 @@ function mergeItems(items, data, mergeStrategy) {
 
   // Loop through each new data point.
   forEach(data, d => {
-    output[d.uuid] = mergeItem(items, d, mergeStrategy);
+    output[d.id] = mergeItem(items, d, mergeStrategy);
   });
 
   return output;
@@ -1261,7 +1264,7 @@ function clearItemsErrors(items) {
     state: {
       ...item.state,
       dirty:
-        item.state.dirty || item.state.error || item.state.syncing || false,
+        item.state.dirty || item.state.error !== null || item.state.syncing || false,
       syncing: false,
       error: null
     }
@@ -1327,7 +1330,7 @@ function mergeTranslations(items, data, mergeStrategy, langcode) {
  * @param  {Object} action Flux standard action
  * @return {Object}        The altered state of the store
  */
-function dataReducer(state = initialDataState, action, mergeStrategy) {
+export function dataReducer(state = initialDataState, action, mergeStrategy) {
   // Grab common variables from the action payload.
   const { id, data } = action;
 
@@ -1352,7 +1355,7 @@ function dataReducer(state = initialDataState, action, mergeStrategy) {
       item.state = {
         ...item.state,
         dirty:
-          item.state.dirty || item.state.error || item.state.syncing || false,
+          item.state.dirty || item.state.error !== null || item.state.syncing || false,
         syncing: false,
         error: null
       };
@@ -1360,9 +1363,9 @@ function dataReducer(state = initialDataState, action, mergeStrategy) {
     case t.SET_SAVED:
       item.state = {
         ...item.state,
-        saved: action.value,
         dirty: true,
-        error: null
+        error: null,
+        saved: action.value,
       };
       break;
     case t.MARK_DIRTY:
@@ -1446,8 +1449,6 @@ export function apiReducer(resource, mergeStrategy) {
     }
 
     // Return State if this is not the resource we care about.
-    // @todo: figure out how this handles included resources as it will need to operate on the including resource as well.
-    //    Probably need another param on the outer function to list array of resources that include this one.
     if (action.resource !== resource) {
       return state;
     }

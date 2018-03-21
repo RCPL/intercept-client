@@ -1,0 +1,779 @@
+{
+  "data": [
+    {
+      "type": "node--event",
+      "id": "665752a8-0dad-44f2-8d9c-a6893b0f9abb",
+      "attributes": {
+        "nid": 26,
+        "uuid": "665752a8-0dad-44f2-8d9c-a6893b0f9abb",
+        "vid": 33,
+        "langcode": "en",
+        "revision_timestamp": 1520480168,
+        "revision_log": null,
+        "status": true,
+        "title": "Test Event",
+        "created": 1518655096,
+        "changed": 1520480168,
+        "promote": true,
+        "sticky": false,
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": {
+          "alias": "/event/2018-02-14/test-event",
+          "pid": 6,
+          "langcode": "en"
+        },
+        "field_capacity_max": 40,
+        "field_date_time": {
+          "value": "2018-02-14T21:00:00",
+          "end_value": "2018-02-15T00:30:00"
+        },
+        "field_event_is_template": false,
+        "field_event_register_period": {
+          "value": "2018-02-15T00:38:16",
+          "end_value": "2018-02-15T10:30:00"
+        },
+        "field_has_waitlist": false,
+        "field_must_register": false,
+        "field_text_content": {
+          "value": "<p>A whole lot of content</p>\r\n",
+          "format": "basic_html"
+        },
+        "field_text_intro": {
+          "value": "<p>This is the intro text</p>\r\n",
+          "format": "basic_html"
+        },
+        "field_text_teaser": "This is the teaser text"
+      },
+      "relationships": {
+        "type": {
+          "data": {
+            "type": "node_type--node_type",
+            "id": "09597c12-63f2-47f5-aa2c-6bab3794db70"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/type",
+            "related":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/type"
+          }
+        },
+        "revision_uid": {
+          "data": {
+            "type": "user--user",
+            "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/revision_uid",
+            "related":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/revision_uid"
+          }
+        },
+        "uid": {
+          "data": {
+            "type": "user--user",
+            "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/uid",
+            "related":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/uid"
+          }
+        },
+        "menu_link": {
+          "data": null
+        },
+        "field_event_audience": {
+          "data": [
+            {
+              "type": "taxonomy_term--audience",
+              "id": "61b2c0f8-71e7-4475-9507-00de921c57cb"
+            }
+          ],
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_event_audience",
+            "related":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_event_audience"
+          }
+        },
+        "field_event_recurrence": {
+          "data": null
+        },
+        "field_event_series": {
+          "data": {
+            "type": "node--event_series",
+            "id": "357d1bd7-afab-4ba8-82e1-7764be4690c2"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_event_series",
+            "related":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_event_series"
+          }
+        },
+        "field_event_subject_heading": {
+          "data": []
+        },
+        "field_event_tags": {
+          "data": []
+        },
+        "field_event_type": {
+          "data": [
+            {
+              "type": "taxonomy_term--event_type",
+              "id": "a71e1ce1-3c55-4c47-b603-9386dca0dd4d"
+            },
+            {
+              "type": "taxonomy_term--event_type",
+              "id": "5fa86ecf-e15b-4191-a64e-fdbccbb0cc64"
+            }
+          ],
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_event_type",
+            "related":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_event_type"
+          }
+        },
+        "field_image_primary": {
+          "data": {
+            "type": "media--image",
+            "id": "ad85973b-9acc-47d0-b182-d4b426a7a0b0"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_image_primary",
+            "related":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_image_primary"
+          }
+        },
+        "field_location": {
+          "data": {
+            "type": "node--location",
+            "id": "5834618d-9260-4e8b-8b3b-1060bf667ea7"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_location",
+            "related":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_location"
+          }
+        },
+        "field_room": {
+          "data": {
+            "type": "node--room",
+            "id": "5750513d-8b6a-4076-b926-d752df9d5141"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_room",
+            "related":
+              "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_room"
+          }
+        }
+      },
+      "links": {
+        "self":
+          "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb"
+      }
+    },
+    {
+      "type": "node--event",
+      "id": "f781596a-829e-416d-9a45-6c5ab73e8c38",
+      "attributes": {
+        "nid": 5,
+        "uuid": "f781596a-829e-416d-9a45-6c5ab73e8c38",
+        "vid": 34,
+        "langcode": "en",
+        "revision_timestamp": 1520960830,
+        "revision_log": null,
+        "status": true,
+        "title": "Valentine Card Making",
+        "created": 1517288452,
+        "changed": 1520960830,
+        "promote": true,
+        "sticky": false,
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": {
+          "alias": "/event/2018-02-03/valentine-card-making",
+          "pid": 5,
+          "langcode": "en"
+        },
+        "field_capacity_max": 15,
+        "field_date_time": {
+          "value": "2018-02-03T10:00:00",
+          "end_value": "2018-02-03T11:00:00"
+        },
+        "field_event_is_template": false,
+        "field_event_register_period": null,
+        "field_has_waitlist": false,
+        "field_must_register": true,
+        "field_text_content": {
+          "value":
+            "<p>We'll provide you with four&nbsp;pre-made options or you can create your own design. All supplies will be provided, including paper, stickers, glitter and glue. We'll even provide you with envelopes. Two cards per person.&nbsp;</p>\r\n",
+          "format": "basic_html"
+        },
+        "field_text_intro": {
+          "value":
+            "<p>Valentine's Day is just around the corner. Do you have your card for that special someone yet? Make it extra special by joining us to create a personalized card for them.</p>\r\n",
+          "format": "basic_html"
+        },
+        "field_text_teaser":
+          "Are you ready for Valentine's Day? Join us and create a personalized Valentine Card for your friend, family or significant other to enjoy. "
+      },
+      "relationships": {
+        "type": {
+          "data": {
+            "type": "node_type--node_type",
+            "id": "09597c12-63f2-47f5-aa2c-6bab3794db70"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/relationships/type",
+            "related":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/type"
+          }
+        },
+        "revision_uid": {
+          "data": {
+            "type": "user--user",
+            "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/relationships/revision_uid",
+            "related":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/revision_uid"
+          }
+        },
+        "uid": {
+          "data": {
+            "type": "user--user",
+            "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/relationships/uid",
+            "related":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/uid"
+          }
+        },
+        "menu_link": {
+          "data": null
+        },
+        "field_event_audience": {
+          "data": [
+            {
+              "type": "taxonomy_term--audience",
+              "id": "45f2d77e-b851-4597-b932-93daf3bef659"
+            }
+          ],
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/relationships/field_event_audience",
+            "related":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/field_event_audience"
+          }
+        },
+        "field_event_recurrence": {
+          "data": null
+        },
+        "field_event_series": {
+          "data": {
+            "type": "node--event_series",
+            "id": "357d1bd7-afab-4ba8-82e1-7764be4690c2"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/relationships/field_event_series",
+            "related":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/field_event_series"
+          }
+        },
+        "field_event_subject_heading": {
+          "data": [
+            {
+              "type": "taxonomy_term--lc_subject",
+              "id": "8abb339d-c533-42bd-a891-7881ada28d1a"
+            }
+          ],
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/relationships/field_event_subject_heading",
+            "related":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/field_event_subject_heading"
+          }
+        },
+        "field_event_tags": {
+          "data": [
+            {
+              "type": "taxonomy_term--tag",
+              "id": "03e6d037-319a-402c-a2c8-cb542b1872b5"
+            }
+          ],
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/relationships/field_event_tags",
+            "related":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/field_event_tags"
+          }
+        },
+        "field_event_type": {
+          "data": [
+            {
+              "type": "taxonomy_term--event_type",
+              "id": "a71e1ce1-3c55-4c47-b603-9386dca0dd4d"
+            }
+          ],
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/relationships/field_event_type",
+            "related":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/field_event_type"
+          }
+        },
+        "field_image_primary": {
+          "data": {
+            "type": "media--image",
+            "id": "47f1b407-61a5-4756-b1b4-4bda1142f82b"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/relationships/field_image_primary",
+            "related":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/field_image_primary"
+          }
+        },
+        "field_location": {
+          "data": {
+            "type": "node--location",
+            "id": "5834618d-9260-4e8b-8b3b-1060bf667ea7"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/relationships/field_location",
+            "related":
+              "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38/field_location"
+          }
+        },
+        "field_room": {
+          "data": null
+        }
+      },
+      "links": {
+        "self":
+          "http://intercept.test/jsonapi/node/event/f781596a-829e-416d-9a45-6c5ab73e8c38"
+      }
+    }
+  ],
+  "jsonapi": {
+    "version": "1.0",
+    "meta": {
+      "links": {
+        "self": "http://jsonapi.org/format/1.0/"
+      }
+    }
+  },
+  "links": {
+    "self":
+      "http://intercept.test/jsonapi/node/event?include=field_image_primary%2Cfield_image_primary.field_media_image%2Cfield_room"
+  },
+  "included": [
+    {
+      "type": "media--image",
+      "id": "ad85973b-9acc-47d0-b182-d4b426a7a0b0",
+      "attributes": {
+        "mid": 5,
+        "uuid": "ad85973b-9acc-47d0-b182-d4b426a7a0b0",
+        "vid": 5,
+        "langcode": "en",
+        "revision_created": 1520480168,
+        "revision_log_message": null,
+        "status": true,
+        "name": "Profile image",
+        "created": 1520480157,
+        "changed": 1520480157,
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": null,
+        "field_media_caption": null,
+        "field_media_credit": null
+      },
+      "relationships": {
+        "bundle": {
+          "data": {
+            "type": "media_type--media_type",
+            "id": "70a7252b-7ce3-45bd-8eab-929f8f63c4b3"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/media/image/ad85973b-9acc-47d0-b182-d4b426a7a0b0/relationships/bundle",
+            "related":
+              "http://intercept.test/jsonapi/media/image/ad85973b-9acc-47d0-b182-d4b426a7a0b0/bundle"
+          }
+        },
+        "revision_user": {
+          "data": null
+        },
+        "thumbnail": {
+          "data": {
+            "type": "file--file",
+            "id": "971685e1-fba5-4eee-bd31-96cf54f4fe4e",
+            "meta": {
+              "alt": "Thumbnail",
+              "title": "Profile image",
+              "width": "400",
+              "height": "400"
+            }
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/media/image/ad85973b-9acc-47d0-b182-d4b426a7a0b0/relationships/thumbnail",
+            "related":
+              "http://intercept.test/jsonapi/media/image/ad85973b-9acc-47d0-b182-d4b426a7a0b0/thumbnail"
+          }
+        },
+        "uid": {
+          "data": {
+            "type": "user--user",
+            "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/media/image/ad85973b-9acc-47d0-b182-d4b426a7a0b0/relationships/uid",
+            "related":
+              "http://intercept.test/jsonapi/media/image/ad85973b-9acc-47d0-b182-d4b426a7a0b0/uid"
+          }
+        },
+        "field_media_image": {
+          "data": {
+            "type": "file--file",
+            "id": "971685e1-fba5-4eee-bd31-96cf54f4fe4e",
+            "meta": {
+              "alt": "This is a person",
+              "title": "",
+              "width": "400",
+              "height": "400"
+            }
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/media/image/ad85973b-9acc-47d0-b182-d4b426a7a0b0/relationships/field_media_image",
+            "related":
+              "http://intercept.test/jsonapi/media/image/ad85973b-9acc-47d0-b182-d4b426a7a0b0/field_media_image"
+          }
+        }
+      },
+      "links": {
+        "self":
+          "http://intercept.test/jsonapi/media/image/ad85973b-9acc-47d0-b182-d4b426a7a0b0"
+      }
+    },
+    {
+      "type": "node--room",
+      "id": "5750513d-8b6a-4076-b926-d752df9d5141",
+      "attributes": {
+        "nid": 2,
+        "uuid": "5750513d-8b6a-4076-b926-d752df9d5141",
+        "vid": 2,
+        "langcode": "en",
+        "revision_timestamp": 1517266081,
+        "revision_log": null,
+        "status": true,
+        "title": "Career Center Desk 1",
+        "created": 1517265967,
+        "changed": 1517266081,
+        "promote": false,
+        "sticky": false,
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": {
+          "alias": "/location/richland-library-north-main/career-center-desk-1",
+          "pid": 2,
+          "langcode": "en"
+        },
+        "field_capacity_max": 1,
+        "field_capacity_min": 1,
+        "field_room_fees": {
+          "value": "<p>$0</p>\r\n",
+          "format": "basic_html"
+        },
+        "field_room_standard_equipment": null,
+        "field_staff_use_only": false,
+        "field_text_content": {
+          "value":
+            "<p>Please limit your use of the career center desks to 2 hours at a time. They are equipped with a computer and printer. Staff are available in the Career Center to help with&nbsp;résumés, job applications and interview strategies.&nbsp;</p>\r\n",
+          "format": "basic_html"
+        },
+        "field_text_intro": {
+          "value":
+            "<p>Looking for a place to work on your résumé or fill out a job application? We've got you covered! Our career center desks come in handy when you need assistance with résumés, job applications, career assessment or interview strategies.</p>\r\n",
+          "format": "basic_html"
+        },
+        "field_text_teaser":
+          "Career center desks come in handy when you need assistance with résumés, job applications, career assessment or interview strategies."
+      },
+      "relationships": {
+        "type": {
+          "data": {
+            "type": "node_type--node_type",
+            "id": "7afbe606-33e3-4f49-8457-3c4547b9b162"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/relationships/type",
+            "related":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/type"
+          }
+        },
+        "revision_uid": {
+          "data": {
+            "type": "user--user",
+            "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/relationships/revision_uid",
+            "related":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/revision_uid"
+          }
+        },
+        "uid": {
+          "data": {
+            "type": "user--user",
+            "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/relationships/uid",
+            "related":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/uid"
+          }
+        },
+        "menu_link": {
+          "data": null
+        },
+        "field_image_primary": {
+          "data": {
+            "type": "media--image",
+            "id": "629e8629-8813-444c-8882-b927085b0948"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/relationships/field_image_primary",
+            "related":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/field_image_primary"
+          }
+        },
+        "field_location": {
+          "data": {
+            "type": "node--location",
+            "id": "5834618d-9260-4e8b-8b3b-1060bf667ea7"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/relationships/field_location",
+            "related":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/field_location"
+          }
+        },
+        "field_room_type": {
+          "data": {
+            "type": "taxonomy_term--room_type",
+            "id": "0597c032-8e1a-4b54-bca8-24df3af5f33a"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/relationships/field_room_type",
+            "related":
+              "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141/field_room_type"
+          }
+        }
+      },
+      "links": {
+        "self":
+          "http://intercept.test/jsonapi/node/room/5750513d-8b6a-4076-b926-d752df9d5141"
+      }
+    },
+    {
+      "type": "file--file",
+      "id": "971685e1-fba5-4eee-bd31-96cf54f4fe4e",
+      "attributes": {
+        "fid": 12,
+        "uuid": "971685e1-fba5-4eee-bd31-96cf54f4fe4e",
+        "langcode": "en",
+        "filename": "testimonial.png",
+        "uri": "public://2018-03/testimonial.png",
+        "filemime": "image/png",
+        "filesize": 273907,
+        "status": true,
+        "created": 1520480125,
+        "changed": 1520480168,
+        "url": "/sites/default/files/2018-03/testimonial.png"
+      },
+      "relationships": {
+        "uid": {
+          "data": {
+            "type": "user--user",
+            "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/file/file/971685e1-fba5-4eee-bd31-96cf54f4fe4e/relationships/uid",
+            "related":
+              "http://intercept.test/jsonapi/file/file/971685e1-fba5-4eee-bd31-96cf54f4fe4e/uid"
+          }
+        }
+      },
+      "links": {
+        "self":
+          "http://intercept.test/jsonapi/file/file/971685e1-fba5-4eee-bd31-96cf54f4fe4e"
+      },
+      "meta": {
+        "derivatives": {
+          "3to2_870x580":
+            "http://intercept.test/sites/default/files/styles/3to2_870x580/public/2018-03/testimonial.png?itok=60ANkz8d",
+          "4to3_740x556":
+            "http://intercept.test/sites/default/files/styles/4to3_740x556/public/2018-03/testimonial.png?itok=kZAPywA_"
+        }
+      }
+    },
+    {
+      "type": "media--image",
+      "id": "47f1b407-61a5-4756-b1b4-4bda1142f82b",
+      "attributes": {
+        "mid": 4,
+        "uuid": "47f1b407-61a5-4756-b1b4-4bda1142f82b",
+        "vid": 4,
+        "langcode": "en",
+        "revision_created": 1517289211,
+        "revision_log_message": null,
+        "status": true,
+        "name": "Valentine's Day Card Making",
+        "created": 1517288720,
+        "changed": 1517288720,
+        "default_langcode": true,
+        "revision_translation_affected": true,
+        "path": null,
+        "field_media_caption": null,
+        "field_media_credit": null
+      },
+      "relationships": {
+        "bundle": {
+          "data": {
+            "type": "media_type--media_type",
+            "id": "70a7252b-7ce3-45bd-8eab-929f8f63c4b3"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/media/image/47f1b407-61a5-4756-b1b4-4bda1142f82b/relationships/bundle",
+            "related":
+              "http://intercept.test/jsonapi/media/image/47f1b407-61a5-4756-b1b4-4bda1142f82b/bundle"
+          }
+        },
+        "revision_user": {
+          "data": null
+        },
+        "thumbnail": {
+          "data": {
+            "type": "file--file",
+            "id": "a8caa5fd-4ed8-4c54-9396-9bd75487d44a",
+            "meta": {
+              "alt": "Thumbnail",
+              "title": "Valentine's Day Card Making",
+              "width": "794",
+              "height": "1000"
+            }
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/media/image/47f1b407-61a5-4756-b1b4-4bda1142f82b/relationships/thumbnail",
+            "related":
+              "http://intercept.test/jsonapi/media/image/47f1b407-61a5-4756-b1b4-4bda1142f82b/thumbnail"
+          }
+        },
+        "uid": {
+          "data": {
+            "type": "user--user",
+            "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/media/image/47f1b407-61a5-4756-b1b4-4bda1142f82b/relationships/uid",
+            "related":
+              "http://intercept.test/jsonapi/media/image/47f1b407-61a5-4756-b1b4-4bda1142f82b/uid"
+          }
+        },
+        "field_media_image": {
+          "data": {
+            "type": "file--file",
+            "id": "a8caa5fd-4ed8-4c54-9396-9bd75487d44a",
+            "meta": {
+              "alt": "Homemade Valentine's Day greeting card",
+              "title": "",
+              "width": "794",
+              "height": "1000"
+            }
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/media/image/47f1b407-61a5-4756-b1b4-4bda1142f82b/relationships/field_media_image",
+            "related":
+              "http://intercept.test/jsonapi/media/image/47f1b407-61a5-4756-b1b4-4bda1142f82b/field_media_image"
+          }
+        }
+      },
+      "links": {
+        "self":
+          "http://intercept.test/jsonapi/media/image/47f1b407-61a5-4756-b1b4-4bda1142f82b"
+      }
+    },
+    {
+      "type": "file--file",
+      "id": "a8caa5fd-4ed8-4c54-9396-9bd75487d44a",
+      "attributes": {
+        "fid": 10,
+        "uuid": "a8caa5fd-4ed8-4c54-9396-9bd75487d44a",
+        "langcode": "en",
+        "filename": "vdaycard.jpg",
+        "uri": "public://2018-01/vdaycard.jpg",
+        "filemime": "image/jpeg",
+        "filesize": 143171,
+        "status": true,
+        "created": 1517288687,
+        "changed": 1517289211,
+        "url": "/sites/default/files/2018-01/vdaycard.jpg"
+      },
+      "relationships": {
+        "uid": {
+          "data": {
+            "type": "user--user",
+            "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+          },
+          "links": {
+            "self":
+              "http://intercept.test/jsonapi/file/file/a8caa5fd-4ed8-4c54-9396-9bd75487d44a/relationships/uid",
+            "related":
+              "http://intercept.test/jsonapi/file/file/a8caa5fd-4ed8-4c54-9396-9bd75487d44a/uid"
+          }
+        }
+      },
+      "links": {
+        "self":
+          "http://intercept.test/jsonapi/file/file/a8caa5fd-4ed8-4c54-9396-9bd75487d44a"
+      },
+      "meta": {
+        "derivatives": {
+          "3to2_870x580":
+            "http://intercept.test/sites/default/files/styles/3to2_870x580/public/2018-01/vdaycard.jpg?itok=UWYOcw4i",
+          "4to3_740x556":
+            "http://intercept.test/sites/default/files/styles/4to3_740x556/public/2018-01/vdaycard.jpg?itok=ODoEwOPH"
+        }
+      }
+    }
+  ]
+}
