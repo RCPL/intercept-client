@@ -1,7 +1,7 @@
 import findKey from 'lodash/findKey';
 import keys from 'lodash/keys';
 import pickBy from 'lodash/pickBy';
-import uuid from 'uuid';
+import uuidv4 from 'uuid/v4';
 
 import { JsonApiSchema, JsonApiModel } from './JsonApiModel';
 import Registrar from './Registrar';
@@ -63,7 +63,7 @@ export const EntityModel = class {
    * @return {Object}      Standard entity formatted data.
    */
   static create(data) {
-    const id = data.attributes.uuid || uuid.v4();
+    const id = data.attributes.uuid || uuidv4();
     const mergedData = Object.assign({}, data);
     mergedData.attributes = mergedData.attributes || {};
     mergedData.attributes.uuid = id;

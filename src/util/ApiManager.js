@@ -1,4 +1,5 @@
 import Bottleneck from 'bottleneck';
+import uuidv4 from 'uuid/v4';
 import assign from 'lodash/assign';
 import filter from 'lodash/filter';
 import forEach from 'lodash/forEach';
@@ -246,7 +247,9 @@ export function handleSuccessResponse(resp, dispatch, resource, model, uuid) {
     const data = 'data' in json ? json.data : json;
 
     const output = {
-      data: Array.isArray(data) ? data.map(EntityModel.import) : EntityModel.import(data)
+      data: Array.isArray(data)
+        ? data.map(EntityModel.import)
+        : EntityModel.import(data)
     };
 
     logger.log('network', output.data);
@@ -307,8 +310,11 @@ export const ApiManager = class {
     this.include = options.include || [];
     this.namespace = options.namespace || 'jsonapi';
     this.priority = options.priority || 9;
+    this.latestFetch = null;
 
     // Bind methods.
+    this.getLatestFetch = this.getLatestFetch.bind(this);
+    this.setLatestFetch = this.setLatestFetch.bind(this);
     this.getEndpoint = this.getEndpoint.bind(this);
     this.getEndpointPath = this.getEndpointPath.bind(this);
     this.getRelationshipEndpoint = this.getRelationshipEndpoint.bind(this);
@@ -611,6 +617,15 @@ export const ApiManager = class {
     return Promise.resolve(Math.floor(new Date().getTime() / 1000));
   }
 
+  getLatestFetch() {
+    return this.latestFetch;
+  }
+
+  setLatestFetch(id) {
+    this.latestFetch = id;
+    return id;
+  }
+
   /**
    * Fetches a resource collection.
    * @param {Object} options
@@ -619,12 +634,11 @@ export const ApiManager = class {
     // on successful JSON response, map data to this.EntityModel.import
     // then dispatch success, type, data (transformed data)
     const {
-      backoffFetch, model, resource
+      backoffFetch, model, resource, getLatestFetch, setLatestFetch
     } = this;
-    const {
-      fetchTimestamp
-    } = this.constructor;
+    const { fetchTimestamp } = this.constructor;
     const { getRequest, getTimestamp } = this.constructor;
+    const currentFetch = setLatestFetch(uuidv4());
 
     const filters = options.filters || [];
     const include = options.include || [];
@@ -669,6 +683,11 @@ export const ApiManager = class {
           .then(resp => {
             if (resp.ok) {
               resp.json().then(json => {
+                // Abort if there's a new request in route.
+                if (currentFetch !== getLatestFetch()) {
+                  return;
+                }
+
                 const output = {
                   data: [].concat(json.data)
                 };
@@ -1159,7 +1178,7 @@ function mergeProp(prop, x, y) {
   if (x[prop] || y[prop]) {
     return {
       ...x[prop],
-      ...y[prop],
+      ...y[prop]
     };
   }
 }
@@ -1182,7 +1201,7 @@ function itemUpdate(item, input) {
 
   output.state = {
     ...item.state,
-    saved: true,
+    saved: true
   };
 
   return output;
@@ -1264,7 +1283,10 @@ function clearItemsErrors(items) {
     state: {
       ...item.state,
       dirty:
-        item.state.dirty || item.state.error !== null || item.state.syncing || false,
+        item.state.dirty ||
+        item.state.error !== null ||
+        item.state.syncing ||
+        false,
       syncing: false,
       error: null
     }
@@ -1355,7 +1377,10 @@ export function dataReducer(state = initialDataState, action, mergeStrategy) {
       item.state = {
         ...item.state,
         dirty:
-          item.state.dirty || item.state.error !== null || item.state.syncing || false,
+          item.state.dirty ||
+          item.state.error !== null ||
+          item.state.syncing ||
+          false,
         syncing: false,
         error: null
       };
@@ -1365,7 +1390,7 @@ export function dataReducer(state = initialDataState, action, mergeStrategy) {
         ...item.state,
         dirty: true,
         error: null,
-        saved: action.value,
+        saved: action.value
       };
       break;
     case t.MARK_DIRTY:
