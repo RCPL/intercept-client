@@ -1,5 +1,10 @@
 export const NAME = 'intercept';
 
+// Filters
+export const DATE = 'date';
+export const KEYWORD = 'keyword';
+
+// Entity Types
 export const TYPE_FILE = 'file--file';
 export const TYPE_EVENT_RECURRENCE = 'event_recurrence--event_recurrence';
 export const TYPE_MEDIA_FILE = 'media--file';
