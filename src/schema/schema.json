@@ -291,7 +291,7 @@
       "model": "taxonomy_term--equipment_type",
       "multiple": false
     },
-    "field_image_primary": {
+    "image_primary": {
       "type": "relationship",
       "model": "media--image",
       "multiple": false
@@ -392,7 +392,7 @@
       "model": "taxonomy_term--event_type",
       "multiple": true
     },
-    "field_image_primary": {
+    "image_primary": {
       "type": "relationship",
       "model": "media--image",
       "multiple": false
@@ -506,7 +506,7 @@
       "model": "user--user",
       "multiple": false
     },
-    "field_image_primary": {
+    "image_primary": {
       "type": "relationship",
       "model": "media--image",
       "multiple": false
@@ -574,7 +574,7 @@
       "model": "user--user",
       "multiple": false
     },
-    "field_image_primary": {
+    "image_primary": {
       "type": "relationship",
       "model": "media--image",
       "multiple": false

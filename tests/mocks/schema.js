@@ -631,7 +631,7 @@ const schemaDefinition = {
           type: 'hasOne',
           model: 'taxonomy_term--equipment_type'
         },
-        field_image_primary: {
+        image_primary: {
           type: 'hasOne',
           model: 'media--image'
         }
@@ -742,7 +742,7 @@ const schemaDefinition = {
           type: 'hasMany',
           model: 'taxonomy_term--event_type'
         },
-        field_image_primary: {
+        image_primary: {
           type: 'hasOne',
           model: 'media--image'
         },
@@ -894,7 +894,7 @@ const schemaDefinition = {
           type: 'hasOne',
           model: 'user--user'
         },
-        field_image_primary: {
+        image_primary: {
           type: 'hasOne',
           model: 'media--image'
         }
@@ -1051,7 +1051,7 @@ const schemaDefinition = {
           type: 'hasOne',
           model: 'user--user'
         },
-        field_image_primary: {
+        image_primary: {
           type: 'hasOne',
           model: 'media--image'
         },
