@@ -1,12 +1,15 @@
 {
   "name": "intercept-client",
-  "version": "1.1.25",
+  "version": "1.1.26",
   "description": "Client library for interacting with the Intercept API.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RCPL/intercept-client.git"
   },
-  "keywords": ["drupal", "orbitjs"],
+  "keywords": [
+    "drupal",
+    "orbitjs"
+  ],
   "author": "John Ferris <https://github.com/pixelwhip>",
   "license": "MIT",
   "bugs": {
@@ -16,23 +19,23 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "jsnext:main": "es/index.js",
-  "files": ["dist", "lib", "es", "src"],
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
   "scripts": {
     "clean": "rimraf lib dist es",
-    "build":
-      "npm run build:commonjs && npm run build:umd && npm run build:umd:min && npm run build:es",
-    "build:watch":
-      "echo 'build && watch the COMMONJS version of the package - for other version, run specific tasks' && npm run build:commonjs:watch",
-    "build:commonjs":
-      "cross-env BABEL_ENV=commonjs babel src --out-dir lib --copy-files ",
+    "build": "npm run build:commonjs && npm run build:umd && npm run build:umd:min && npm run build:es",
+    "build:watch": "echo 'build && watch the COMMONJS version of the package - for other version, run specific tasks' && npm run build:commonjs:watch",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --copy-files ",
     "build:commonjs:watch": "npm run build:commonjs -- --watch",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --copy-files ",
     "build:es:watch": "npm run build:es -- --watch",
-    "build:umd":
-      "cross-env BABEL_ENV=es NODE_ENV=development rollup src/index.js --config --sourcemap --output.file dist/intercept-client.js",
+    "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup src/index.js --config --sourcemap --output.file dist/intercept-client.js",
     "build:umd:watch": "npm run build:umd -- --watch",
-    "build:umd:min":
-      "cross-env BABEL_ENV=es NODE_ENV=production rollup src/index.js --config --output.file dist/intercept-client.min.js",
+    "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup src/index.js --config --output.file dist/intercept-client.min.js",
     "generate:schema": "node ./scripts/generate-schema.js",
     "lint": "./node_modules/.bin/eslint src",
     "lint-fix": "./node_modules/.bin/eslint --fix src --ext .js",
@@ -44,9 +47,13 @@
   "jest": {
     "testRegex": "(/tests/.*\\.spec.js)$",
     "automock": false,
-    "setupFiles": ["./tests/setupJest.js"]
+    "setupFiles": [
+      "./tests/setupJest.js"
+    ]
   },
-  "pre-commit": ["test"],
+  "pre-commit": [
+    "test"
+  ],
   "devDependencies": {
     "add": "^2.0.6",
     "babel-cli": "^6.26.0",
