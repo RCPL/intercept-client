@@ -590,6 +590,52 @@
       "multiple": false
     }
   },
+  "room_reservation--room_reservation": {
+    "id": {
+      "type": "integer"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "status": {
+      "type": "boolean"
+    },
+    "created": {
+      "type": "number"
+    },
+    "changed": {
+      "type": "number"
+    },
+    "field_attendee_count": {
+      "type": "integer"
+    },
+    "field_dates": {
+      "type": "object"
+    },
+    "field_group_name": {
+      "type": "object"
+    },
+    "author": {
+      "type": "relationship",
+      "model": "user--user",
+      "multiple": false
+    },
+    "image": {
+      "type": "relationship",
+      "model": "media--image",
+      "multiple": false
+    },
+    "field_location": {
+      "type": "relationship",
+      "model": "node--location",
+      "multiple": false
+    },
+    "field_event": {
+      "type": "relationship",
+      "model": "node--event",
+      "multiple": false
+    }
+  },
   "taxonomy_term--audience": {
     "tid": {
       "type": "integer"

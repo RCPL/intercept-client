@@ -16,6 +16,7 @@ export const TYPE_EVENT = 'node--event';
 export const TYPE_EVENT_SERIES = 'node--event_series';
 export const TYPE_LOCATION = 'node--location';
 export const TYPE_ROOM = 'node--room';
+export const TYPE_ROOM_RESERVATION = 'room_reservation--room_reservation';
 export const TYPE_AUDIENCE = 'taxonomy_term--audience';
 export const TYPE_EQUIPMENT_TYPE = 'taxonomy_term--equipment_type';
 export const TYPE_EVALUATION_CRITERIA = 'taxonomy_term--evaluation_criteria';
