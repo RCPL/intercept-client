@@ -239,9 +239,8 @@ export function processIncludes(dispatch) {
  */
 export function handleSuccessResponse(resp, dispatch, resource, model, uuid) {
   return resp.json().then(json => {
-    const { getTimestamp } = this.constructor;
     logger.group('network', 'response');
-    logger.log('network', `Response: ${getTimestamp()} ${resource}`, json);
+    logger.log('network', `Response: ${resource}`, json);
     // Handle cases where the response doesn't have a nested data object,
     //  such as file uploads.
     const data = 'data' in json ? json.data : json;
@@ -988,16 +987,6 @@ export const ApiManager = class {
 
       if (entity.state.error) {
         return Promise.reject(new Error('Will not retry a request with an error state.'));
-      }
-
-      // Exit if we're not logged in.
-      if (!state.userData.auth.loggedIn) {
-        return Promise.reject(new Error('User is logged out: Aborting request.'));
-      }
-
-      // Exit if we're offline.
-      if (!state.onlineStatus) {
-        return Promise.reject(new Error('Device is offline: Aborting request.'));
       }
 
       // Has this entity successfully saved to remotely?

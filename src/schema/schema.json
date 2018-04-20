@@ -606,15 +606,6 @@
     "changed": {
       "type": "number"
     },
-    "field_attendee_count": {
-      "type": "integer"
-    },
-    "field_dates": {
-      "type": "object"
-    },
-    "field_group_name": {
-      "type": "object"
-    },
     "author": {
       "type": "relationship",
       "model": "user--user",
@@ -624,6 +615,18 @@
       "type": "relationship",
       "model": "media--image",
       "multiple": false
+    },
+    "field_status": {
+      "type": "object"
+    },
+    "field_attendee_count": {
+      "type": "integer"
+    },
+    "field_dates": {
+      "type": "object"
+    },
+    "field_group_name": {
+      "type": "object"
     },
     "field_location": {
       "type": "relationship",
