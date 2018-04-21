@@ -175,7 +175,7 @@ export const EntityModel = class {
   static export(entity) {
     // const model = new JsonApiModel(this.jsonApiSchema);
 
-    const data = Object.assign({}, entity);
+    const data = { ...entity.data };
     const ignoredAttributes = ['created', 'changed', 'nid', 'tid', 'id'];
     const ignoredRelationships = ['node_type'];
 
