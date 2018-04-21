@@ -613,7 +613,19 @@
       "type": "object"
     },
     "field_group_name": {
+      "type": "string"
+    },
+    "field_meeting_dates": {
       "type": "object"
+    },
+    "field_refreshments": {
+      "type": "boolean"
+    },
+    "field_refreshments_description": {
+      "type": "object"
+    },
+    "field_status": {
+      "type": "string"
     },
     "author": {
       "type": "relationship",
@@ -625,14 +637,24 @@
       "model": "media--image",
       "multiple": false
     },
-    "field_location": {
+    "location": {
       "type": "relationship",
       "model": "node--location",
+      "multiple": false
+    },
+    "field_room": {
+      "type": "relationship",
+      "model": "node--room",
       "multiple": false
     },
     "field_event": {
       "type": "relationship",
       "model": "node--event",
+      "multiple": false
+    },
+    "field_user": {
+      "type": "relationship",
+      "model": "user--user",
       "multiple": false
     }
   },
