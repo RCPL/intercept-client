@@ -1349,7 +1349,7 @@ export function dataReducer(state = initialDataState, action, mergeStrategy) {
 
   // If this is a brand new item, just return data.
   if (action.type === t.ADD) {
-    item = data;
+    item.data = data;
   }
   else if (id in state === false) {
     // Exit if we don't have the item.
@@ -1421,7 +1421,7 @@ export function dataReducer(state = initialDataState, action, mergeStrategy) {
       };
       break;
     case t.ADD:
-      item = data;
+      item.data = data;
       break;
     case t.EDIT:
       item = itemEdit(item, data);
