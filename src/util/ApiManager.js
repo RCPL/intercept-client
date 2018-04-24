@@ -1422,6 +1422,12 @@ export function dataReducer(state = initialDataState, action, mergeStrategy) {
       break;
     case t.ADD:
       item.data = data;
+      item.state = {
+        saved: false,
+        syncing: false,
+        error: null,
+        dirty: true
+      };
       break;
     case t.EDIT:
       item = itemEdit(item, data);
