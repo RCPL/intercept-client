@@ -647,6 +647,11 @@
       "model": "node--room",
       "multiple": false
     },
+    "field_meeting_purpose": {
+      "type": "relationship",
+      "model": "taxonomy_term--meeting_purpose",
+      "multiple": false
+    },
     "field_event": {
       "type": "relationship",
       "model": "node--event",
