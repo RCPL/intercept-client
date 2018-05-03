@@ -549,6 +549,9 @@
     "field_capacity_min": {
       "type": "integer"
     },
+    "field_reservable_online": {
+      "type": "boolean"
+    },
     "field_room_fees": {
       "type": "object"
     },
