@@ -484,6 +484,9 @@
     "field_contact_number": {
       "type": "string"
     },
+    "field_features": {
+      "type": "string"
+    },
     "field_location_hours": {
       "type": "array"
     },
@@ -617,6 +620,9 @@
     },
     "field_meeting_dates": {
       "type": "object"
+    },
+    "field_meeting_purpose_details": {
+      "type": "string"
     },
     "field_refreshments": {
       "type": "boolean"
@@ -821,6 +827,9 @@
     },
     "description": {
       "type": "object"
+    },
+    "field_requires_explanation": {
+      "type": "boolean"
     },
     "weight": {
       "type": "integer"
