@@ -337,6 +337,9 @@
     "field_event_register_period": {
       "type": "object"
     },
+    "field_featured": {
+      "type": "boolean"
+    },
     "field_has_waitlist": {
       "type": "boolean"
     },
@@ -376,11 +379,6 @@
       "type": "relationship",
       "model": "node--event_series",
       "multiple": false
-    },
-    "field_event_subject_heading": {
-      "type": "relationship",
-      "model": "taxonomy_term--lc_subject",
-      "multiple": true
     },
     "field_event_tags": {
       "type": "relationship",
