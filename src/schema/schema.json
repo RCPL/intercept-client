@@ -64,6 +64,33 @@
       "multiple": false
     }
   },
+  "event_registration--event_registration": {
+    "title": {
+      "type": "string"
+    },
+    "id": {
+      "type": "integer"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "created": {
+      "type": "number"
+    },
+    "changed": {
+      "type": "number"
+    },
+    "author": {
+      "type": "relationship",
+      "model": "user--user",
+      "multiple": false
+    },
+    "field_event": {
+      "type": "relationship",
+      "model": "node--event",
+      "multiple": false
+    }
+  },
   "event_recurrence--event_recurrence": {
     "id": {
       "type": "integer"
@@ -597,6 +624,9 @@
     }
   },
   "room_reservation--room_reservation": {
+    "title": {
+      "type": "string"
+    },
     "id": {
       "type": "integer"
     },
@@ -611,6 +641,9 @@
     },
     "changed": {
       "type": "number"
+    },
+    "location": {
+      "type": "string"
     },
     "field_attendee_count": {
       "type": "integer"
@@ -644,11 +677,6 @@
     "image": {
       "type": "relationship",
       "model": "media--image",
-      "multiple": false
-    },
-    "location": {
-      "type": "relationship",
-      "model": "node--location",
       "multiple": false
     },
     "field_room": {
