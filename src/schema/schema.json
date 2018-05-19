@@ -80,6 +80,9 @@
     "changed": {
       "type": "number"
     },
+    "status": {
+      "type": "string"
+    },
     "author": {
       "type": "relationship",
       "model": "user--user",
@@ -116,6 +119,9 @@
     },
     "changed": {
       "type": "number"
+    },
+    "status": {
+      "type": "string"
     },
     "author": {
       "type": "relationship",
