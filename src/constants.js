@@ -14,6 +14,7 @@ export const TYPE_MEDIA_VIDEO = 'media--web_video';
 export const TYPE_EQUIPMENT = 'node--equipment';
 export const TYPE_EVENT = 'node--event';
 export const TYPE_EVENT_SERIES = 'node--event_series';
+export const TYPE_EVENT_REGISTRATION = 'event_registration--event_registration';
 export const TYPE_LOCATION = 'node--location';
 export const TYPE_ROOM = 'node--room';
 export const TYPE_ROOM_RESERVATION = 'room_reservation--room_reservation';
