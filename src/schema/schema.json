@@ -101,6 +101,43 @@
       "multiple": false
     }
   },
+  "event_attendance--event_attendance": {
+    "title": {
+      "type": "string"
+    },
+    "id": {
+      "type": "integer"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "created": {
+      "type": "number"
+    },
+    "changed": {
+      "type": "number"
+    },
+    "author": {
+      "type": "relationship",
+      "model": "user--user",
+      "multiple": false
+    },
+    "field_event": {
+      "type": "relationship",
+      "model": "node--event",
+      "multiple": false
+    },
+    "field_attendees": {
+      "type": "relationship",
+      "model": "taxonomy_term--population_segment",
+      "multiple": true
+    },
+    "field_user": {
+      "type": "relationship",
+      "model": "user--user",
+      "multiple": false
+    }
+  },
   "event_recurrence--event_recurrence": {
     "id": {
       "type": "integer"
