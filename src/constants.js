@@ -13,6 +13,7 @@ export const TYPE_MEDIA_SLIDESHOW = 'media--slideshow';
 export const TYPE_MEDIA_VIDEO = 'media--web_video';
 export const TYPE_EQUIPMENT = 'node--equipment';
 export const TYPE_EVENT = 'node--event';
+export const TYPE_EVENT_ATTENDANCE = 'event_attendance--event_attendance';
 export const TYPE_EVENT_SERIES = 'node--event_series';
 export const TYPE_EVENT_REGISTRATION = 'event_registration--event_registration';
 export const TYPE_LOCATION = 'node--location';

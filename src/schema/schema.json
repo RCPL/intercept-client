@@ -89,6 +89,16 @@
       "type": "relationship",
       "model": "node--event",
       "multiple": false
+    },
+    "field_registrants": {
+      "type": "relationship",
+      "model": "taxonomy_term--population_segment",
+      "multiple": true
+    },
+    "field_user": {
+      "type": "relationship",
+      "model": "user--user",
+      "multiple": false
     }
   },
   "event_recurrence--event_recurrence": {
