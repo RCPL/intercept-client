@@ -435,6 +435,9 @@
     "field_text_teaser": {
       "type": "string"
     },
+    "registration": {
+      "type": "object"
+    },
     "type": {
       "type": "relationship",
       "model": "node_type--node_type",
