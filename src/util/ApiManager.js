@@ -964,7 +964,7 @@ export const ApiManager = class {
    * @param  {String} uuid   UUID of the entity to create or update remotely.
    * @return {Function}      Redux thunk.
    */
-  sync(uuid) {
+  sync(uuid, options) {
     const {
       backoffFetch, model, include, resource
     } = this;
@@ -1009,8 +1009,9 @@ export const ApiManager = class {
       const endpoint = this.getEndpoint(endpointParts);
 
       const request = getRequest(endpoint, {
+        ...options,
         method,
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       function makeApiCall() {
