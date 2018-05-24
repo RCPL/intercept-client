@@ -102,6 +102,16 @@ describe('ApiManager', () => {
     expect(testApi.getEndpointPath()).toEqual('jsonapi/node/event');
   });
 
+  it('getEndpointInclude', () => {
+    expect(ApiManager.getEndpointInclude([])).toEqual({});
+    expect(ApiManager.getEndpointInclude(['uid'])).toEqual({
+      include: 'uid',
+    });
+    expect(ApiManager.getEndpointInclude(['uid', 'field_event'])).toEqual({
+      include: 'uid,field_event',
+    });
+  });
+
   it('getEndpointOrigin', () => {
     expect(ApiManager.getEndpointOrigin({
       host: 'http://www.example.com'

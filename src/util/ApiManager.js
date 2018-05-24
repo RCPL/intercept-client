@@ -449,7 +449,7 @@ export const ApiManager = class {
    */
   static getEndpointInclude(include) {
     // Set includes if they exist.
-    return Array.isArray(include) ? { include: include.join(',') } : {};
+    return Array.isArray(include) && include.length > 0 ? { include: include.join(',') } : {};
   }
 
   /**
