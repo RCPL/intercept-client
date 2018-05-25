@@ -6,6 +6,7 @@ export const KEYWORD = 'keyword';
 
 // Entity Types
 export const TYPE_FILE = 'file--file';
+export const TYPE_SAVED_EVENT = 'flagging--saved_event';
 export const TYPE_EVENT_RECURRENCE = 'event_recurrence--event_recurrence';
 export const TYPE_MEDIA_FILE = 'media--file';
 export const TYPE_MEDIA_IMAGE = 'media--image';

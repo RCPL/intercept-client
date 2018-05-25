@@ -21,7 +21,7 @@
     "changed": {
       "type": "number"
     },
-    "user_id": {
+    "author": {
       "type": "relationship",
       "model": "user--user",
       "multiple": false
@@ -57,6 +57,39 @@
     },
     "url": {
       "type": "string"
+    },
+    "uid": {
+      "type": "relationship",
+      "model": "user--user",
+      "multiple": false
+    }
+  },
+  "flagging--saved_event": {
+    "id": {
+      "type": "integer"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "entity_type": {
+      "type": "string"
+    },
+    "entity_id": {
+      "type": "integer"
+    },
+    "global": {
+      "type": "boolean"
+    },
+    "session_id": {
+      "type": "integer"
+    },
+    "created": {
+      "type": "number"
+    },
+    "flagged_entity": {
+      "type": "relationship",
+      "model": "node--event",
+      "multiple": false
     },
     "uid": {
       "type": "relationship",
@@ -157,7 +190,7 @@
     "changed": {
       "type": "number"
     },
-    "user_id": {
+    "author": {
       "type": "relationship",
       "model": "user--user",
       "multiple": false
