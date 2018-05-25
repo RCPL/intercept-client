@@ -449,7 +449,7 @@ export const ApiManager = class {
    */
   static getEndpointInclude(include) {
     // Set includes if they exist.
-    return Array.isArray(include) ? { include: include.join(',') } : {};
+    return Array.isArray(include) && include.length > 0 ? { include: include.join(',') } : {};
   }
 
   /**
@@ -641,6 +641,7 @@ export const ApiManager = class {
 
     const filters = options.filters || [];
     const include = options.include || [];
+    const { fields } = options;
     const _fetchAll = this.fetchAll.bind(this);
     const _fetchTranslations = this.fetchTranslations.bind(this);
     let replace = options.replace || false;
@@ -661,7 +662,8 @@ export const ApiManager = class {
         options.endpoint ||
         this.getEndpoint({
           filters,
-          include
+          include,
+          fields,
         });
 
       const request = getRequest(endpoint, options);
