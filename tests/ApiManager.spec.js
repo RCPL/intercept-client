@@ -117,6 +117,30 @@ describe('ApiManager', () => {
     }));
   });
 
+  it('can apply limit', () => {
+    const limit = 20;
+
+    expect(testApi.getEndpoint({ limit, fields: null })).toEqual(url.format({
+      host: '/',
+      pathname: 'jsonapi/node/event',
+      query: {
+        'page[limit]': limit,
+      },
+    }));
+  });
+
+  it('can apply offset', () => {
+    const offset = 3;
+
+    expect(testApi.getEndpoint({ offset, fields: null })).toEqual(url.format({
+      host: '/',
+      pathname: 'jsonapi/node/event',
+      query: {
+        'page[offset]': offset,
+      },
+    }));
+  });
+
   it('getEndpointPath', () => {
     expect(testApi.getEndpointPath()).toEqual('jsonapi/node/event');
   });

@@ -430,9 +430,7 @@ export const ApiManager = class {
       (query, value) => {
         const direction = value.direction === 'DESC' ? '-' : '';
         const sortParam = `${direction}${value.path}`;
-        return query
-          ? [].concat(query, sortParam).join(',')
-          : sortParam;
+        return query ? [].concat(query, sortParam).join(',') : sortParam;
       },
       null
     );
@@ -479,6 +477,38 @@ export const ApiManager = class {
   }
 
   /**
+   * Creates a query parameter object formatted for pagination limit
+   * See https://www.drupal.org/docs/8/modules/json-api/pagination
+   * See http://jsonapi.org/format/#fetching-pagination
+   * @param  {number} limit
+   *  @todo document
+   * @return {Object}
+   *  An object of query param key|value pairs
+   */
+  static getEndpointLimit(limit) {
+    // Set includes if they exist.
+    return limit
+      ? { 'page[limit]': limit }
+      : {};
+  }
+
+  /**
+   * Creates a query parameter object formatted for pagination offset
+   * See https://www.drupal.org/docs/8/modules/json-api/pagination
+   * See http://jsonapi.org/format/#fetching-pagination
+   * @param  {number} offset
+   *  @todo document
+   * @return {Object}
+   *  An object of query param key|value pairs
+   */
+  static getEndpointOffset(offset) {
+    // Set includes if they exist.
+    return offset
+      ? { 'page[offset]': offset }
+      : {};
+  }
+
+  /**
    * Creates a query parameter object formatted for sparse fieldsets
    * See https://www.drupal.org/docs/8/modules/json-api/collections-filtering-and-sorting
    * See http://jsonapi.org/format/#fetching-sparse-fieldsets
@@ -509,7 +539,17 @@ export const ApiManager = class {
       ? this.constructor.getEndpointSort(options.sort)
       : {};
 
-    return assign(params, filters, fields, include, sort);
+    // Set limit if specified.
+    const limit = options.limit
+      ? this.constructor.getEndpointLimit(options.limit)
+      : {};
+
+    // Set offset if specified.
+    const offset = options.offset
+      ? this.constructor.getEndpointOffset(options.offset)
+      : {};
+
+    return assign(params, filters, fields, limit, include, offset, sort);
   }
 
   /**
@@ -547,7 +587,9 @@ export const ApiManager = class {
       fields: options.fields,
       filters: options.filters,
       include: options.include,
-      sort: options.sort,
+      limit: options.limit,
+      offset: options.offset,
+      sort: options.sort
     });
 
     // Format the url string.
@@ -669,7 +711,7 @@ export const ApiManager = class {
       model,
       resource,
       getLatestFetch,
-      setLatestFetch,
+      setLatestFetch
     } = this;
     const { fetchTimestamp } = this.constructor;
     const { getRequest, getTimestamp } = this.constructor;
@@ -678,7 +720,7 @@ export const ApiManager = class {
     const filters = options.filters || [];
     const include = options.include || [];
     const sort = options.sort || [];
-    const { fields } = options;
+    const { fields, limit, offset } = options;
     const _fetchAll = this.fetchAll.bind(this);
     const _fetchTranslations = this.fetchTranslations.bind(this);
     let replace = options.replace || false;
@@ -701,7 +743,9 @@ export const ApiManager = class {
           filters,
           include,
           fields,
-          sort
+          sort,
+          limit,
+          offset
         });
 
       const request = getRequest(endpoint, options);
@@ -824,6 +868,8 @@ export const ApiManager = class {
         return Promise.resolve('Aborted');
       }
 
+      const { limit, offset } = options;
+
       const endpoint =
         options.endpoint ||
         this.getEndpoint({
@@ -834,7 +880,9 @@ export const ApiManager = class {
             path: 'langcode',
             value: options.langcode,
             operator: '='
-          })
+          }),
+          limit,
+          offset
         });
 
       const request = getRequest(endpoint, options);
@@ -979,7 +1027,7 @@ export const ApiManager = class {
 
       const request = getRequest(endpoint, {
         method,
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       });
 
       logger.log('network', method, request);
@@ -1053,7 +1101,7 @@ export const ApiManager = class {
       const request = getRequest(endpoint, {
         ...options,
         method,
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       });
 
       function makeApiCall() {
