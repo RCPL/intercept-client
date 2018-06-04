@@ -352,8 +352,8 @@ export const ApiManager = class {
   }
 
   /**
-   * Creates a query parameter object formated for filters
-   * See https://www.drupal.org/docs/8/modules/json-api/collections-filtering-and-sorting
+   * Creates a query parameter object formatted for filters
+   * See https://www.drupal.org/docs/8/modules/json-api/filtering
    * @param  {Object} filters
    *  @todo document
    * @return {Object}
@@ -417,7 +417,31 @@ export const ApiManager = class {
   }
 
   /**
-   * Creates a query parameter object formated for sparse fieldsets
+   * Creates a query parameter object formatted for sorts
+   * See https://www.drupal.org/docs/8/modules/json-api/collections-and-sorting
+   * @param  {Object} sort
+   *  @todo document
+   * @return {Object}
+   *  An object of query param key|value pairs
+   */
+  static getEndpointSort(sort) {
+    const output = reduce(
+      sort,
+      (query, value) => {
+        const direction = value.direction === 'DESC' ? '-' : '';
+        const sortParam = `${direction}${value.path}`;
+        return query
+          ? [].concat(query, sortParam).join(',')
+          : sortParam;
+      },
+      null
+    );
+
+    return { sort: output };
+  }
+
+  /**
+   * Creates a query parameter object formatted for sparse fieldsets
    * See https://www.drupal.org/docs/8/modules/json-api/collections-filtering-and-sorting
    * See http://jsonapi.org/format/#fetching-sparse-fieldsets
    * @param  {Object} fields
@@ -439,7 +463,7 @@ export const ApiManager = class {
   }
 
   /**
-   * Creates a query parameter object formated for including related resources
+   * Creates a query parameter object formatted for including related resources
    * See https://www.drupal.org/docs/8/modules/json-api/fetching-resources-get
    * See http://jsonapi.org/format/#fetching-includes
    * @param  {Object} include
@@ -449,11 +473,13 @@ export const ApiManager = class {
    */
   static getEndpointInclude(include) {
     // Set includes if they exist.
-    return Array.isArray(include) && include.length > 0 ? { include: include.join(',') } : {};
+    return Array.isArray(include) && include.length > 0
+      ? { include: include.join(',') }
+      : {};
   }
 
   /**
-   * Creates a query parameter object formated for sparse fieldsets
+   * Creates a query parameter object formatted for sparse fieldsets
    * See https://www.drupal.org/docs/8/modules/json-api/collections-filtering-and-sorting
    * See http://jsonapi.org/format/#fetching-sparse-fieldsets
    * @param  {Object} fields
@@ -478,7 +504,12 @@ export const ApiManager = class {
       ? this.constructor.getEndpointInclude(options.include)
       : {};
 
-    return assign(params, filters, fields, include);
+    // Set sorts if they exist.
+    const sort = options.sort
+      ? this.constructor.getEndpointSort(options.sort)
+      : {};
+
+    return assign(params, filters, fields, include, sort);
   }
 
   /**
@@ -515,7 +546,8 @@ export const ApiManager = class {
       params: options.params,
       fields: options.fields,
       filters: options.filters,
-      include: options.include
+      include: options.include,
+      sort: options.sort,
     });
 
     // Format the url string.
@@ -633,7 +665,11 @@ export const ApiManager = class {
     // on successful JSON response, map data to this.EntityModel.import
     // then dispatch success, type, data (transformed data)
     const {
-      backoffFetch, model, resource, getLatestFetch, setLatestFetch
+      backoffFetch,
+      model,
+      resource,
+      getLatestFetch,
+      setLatestFetch,
     } = this;
     const { fetchTimestamp } = this.constructor;
     const { getRequest, getTimestamp } = this.constructor;
@@ -641,6 +677,7 @@ export const ApiManager = class {
 
     const filters = options.filters || [];
     const include = options.include || [];
+    const sort = options.sort || [];
     const { fields } = options;
     const _fetchAll = this.fetchAll.bind(this);
     const _fetchTranslations = this.fetchTranslations.bind(this);
@@ -664,6 +701,7 @@ export const ApiManager = class {
           filters,
           include,
           fields,
+          sort
         });
 
       const request = getRequest(endpoint, options);
@@ -752,7 +790,9 @@ export const ApiManager = class {
 
         return Promise.all([fetchTime, fetchData])
           .then(values => {
+            // Set the collection updated timestamp.
             dispatch(a.setTimestamp(resource, values[0]));
+            // Return the fetched data.
             return values[1];
           })
           .catch(err => {
@@ -939,7 +979,7 @@ export const ApiManager = class {
 
       const request = getRequest(endpoint, {
         method,
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       logger.log('network', method, request);

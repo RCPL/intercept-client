@@ -98,6 +98,25 @@ describe('ApiManager', () => {
     }));
   });
 
+  it('can apply sort', () => {
+    const sort = {
+      created: {
+        path: 'created',
+        direction: 'DESC'
+      },
+      user: {
+        path: 'uid.name'
+      },
+    };
+    expect(testApi.getEndpoint({ sort, fields: null })).toEqual(url.format({
+      host: '/',
+      pathname: 'jsonapi/node/event',
+      query: {
+        sort: '-created,uid.name'
+      },
+    }));
+  });
+
   it('getEndpointPath', () => {
     expect(testApi.getEndpointPath()).toEqual('jsonapi/node/event');
   });
