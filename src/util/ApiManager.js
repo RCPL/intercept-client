@@ -695,6 +695,7 @@ export const ApiManager = class {
 
   fetcher(options = {}) {
     let nextLink;
+    let totalFetched = 0;
     let done = false;
 
     const getNextLink = () => nextLink;
@@ -703,8 +704,10 @@ export const ApiManager = class {
       next: this.fetchAll({
         ...options,
         endpoint: getNextLink(),
-        onNext: endpoint => {
+        totalFetched,
+        onNext: (endpoint, total) => {
           nextLink = endpoint;
+          totalFetched = total;
         },
         onDone: () => {
           if (options.onDone) {
@@ -735,12 +738,12 @@ export const ApiManager = class {
     const include = options.include || [];
     const sort = options.sort || [];
     const count = options.count || 0;
+    let totalFetched = options.totalFetched || 0;
     const {
       fields, limit, offset, onNext, onEnd
     } = options;
     const _fetchAll = this.fetchAll.bind(this);
     let replace = options.replace || false;
-    let totalFetched = 0;
 
     return (dispatch, getState) => {
       const state = getState();
@@ -874,7 +877,7 @@ export const ApiManager = class {
                 }
                 else if (onNext) {
                   // Call onNext()
-                  onNext(json.links.next);
+                  onNext(json.links.next, totalFetched);
                 }
               });
             }
