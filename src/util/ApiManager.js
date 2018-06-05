@@ -701,23 +701,22 @@ export const ApiManager = class {
     const getNextLink = () => nextLink;
 
     return {
-      next: () => {
-        this.fetchAll({
-          ...options,
-          endpoint: getNextLink(),
-          totalFetched,
-          onNext: (endpoint, total) => {
-            nextLink = endpoint;
-            totalFetched = total;
-          },
-          onDone: () => {
-            if (options.onDone) {
-              options.onDone();
-            }
-            done = true;
+      next: () => this.fetchAll({
+        ...options,
+        endpoint: getNextLink(),
+        totalFetched,
+        onNext: (endpoint, total) => {
+          nextLink = endpoint;
+          totalFetched = total;
+        },
+        onDone: () => {
+          if (options.onDone) {
+            options.onDone();
           }
-        });
-      },
+          done = true;
+        }
+      });
+      ,
       isDone: () => done
     };
   }
