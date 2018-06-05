@@ -715,8 +715,7 @@ export const ApiManager = class {
           }
           done = true;
         }
-      });
-      ,
+      }),
       isDone: () => done
     };
   }
