@@ -486,7 +486,6 @@ export const ApiManager = class {
    *  An object of query param key|value pairs
    */
   static getEndpointLimit(limit) {
-    // Set includes if they exist.
     return limit
       ? { 'page[limit]': limit }
       : {};
@@ -502,7 +501,6 @@ export const ApiManager = class {
    *  An object of query param key|value pairs
    */
   static getEndpointOffset(offset) {
-    // Set includes if they exist.
     return offset
       ? { 'page[offset]': offset }
       : {};
@@ -699,6 +697,30 @@ export const ApiManager = class {
     return id;
   }
 
+  fetcher(options = {}) {
+    let nextLink;
+    let done = false;
+
+    const getNextLink = () => nextLink;
+
+    return {
+      next: this.fetchAll({
+        ...options,
+        endpoint: getNextLink(),
+        onNext: (endpoint) => {
+          nextLink = endpoint;
+        },
+        onDone: () => {
+          if (options.onDone) {
+            options.onDone();
+          }
+          done = true;
+        }
+      }),
+      isDone: () => done
+    };
+  }
+
   /**
    * Fetches a resource collection.
    * @param {Object} options
@@ -720,7 +742,14 @@ export const ApiManager = class {
     const filters = options.filters || [];
     const include = options.include || [];
     const sort = options.sort || [];
-    const { fields, limit, offset } = options;
+    const count = options.count || 0
+    const {
+      fields,
+      limit,
+      offset,
+      onNext,
+      onEnd,
+    } = options;
     const _fetchAll = this.fetchAll.bind(this);
     const _fetchTranslations = this.fetchTranslations.bind(this);
     let replace = options.replace || false;
@@ -728,7 +757,9 @@ export const ApiManager = class {
     return (dispatch, getState) => {
       const state = getState();
 
+      //
       // Handle request for recent content.
+      //
       if (options.recent && state[resource].updated) {
         filters.push({
           path: 'changed',
@@ -737,6 +768,9 @@ export const ApiManager = class {
         });
       }
 
+      //
+      // Construct and endpoint if one was not supplied
+      //
       const endpoint =
         options.endpoint ||
         this.getEndpoint({
@@ -748,33 +782,59 @@ export const ApiManager = class {
           offset
         });
 
+      //
+      // Generate the request object
+      //
       const request = getRequest(endpoint, options);
 
-      // Dispatch generic api request action.
+      //
+      // Dispatch API collection request action.
+      //
       dispatch(a.request(resource));
-
       logger.log('network', 'Request', request);
 
+      //
+      // Make the actual API call
+      //
       function makeApiCall() {
+
+        //
+        // Get the current timestamp
+        // This is referenced later when fetching fresh data, or data changed after this timestamp.
+        //
         const fetchTime = fetchTimestamp(getState)
           .then(time => time)
           .catch(err => {
             logger.log(err);
           });
 
+        //
+        // Fetch the data.
+        //
         const fetchData = backoffFetch(request, responseHandler, errorHandler)
           .then(resp => {
+            //
+            // Handle an OK response
+            //
             if (resp.ok) {
               resp.json().then(json => {
+                //
                 // Abort if there's a new request in route.
+                //
                 if (currentFetch !== getLatestFetch()) {
                   return;
                 }
 
+                //
+                // Ensure the response data is an Array
+                //
                 const output = {
                   data: [].concat(json.data)
                 };
 
+                //
+                // Log network response
+                //
                 logger.group('network', 'response');
                 logger.log(
                   'network',
@@ -784,41 +844,51 @@ export const ApiManager = class {
                 logger.log('network', output.data);
                 logger.groupEnd('network', 'response');
 
+                //
                 // Process included resources.
+                //
                 if ('included' in json) {
                   processIncludes(dispatch)(json.included);
                 }
 
+                //
                 // Purge store if replacing.
+                //
                 if (replace) {
                   dispatch(a.purge(resource));
                   // Ensure it only purges once.
                   replace = false;
                 }
 
+                //
+                // Dispatch Receive action
+                //
                 dispatch(a.receive(output, resource));
 
+                const hasMore = json.links && json.links.next;
+
+                if (!hasMore) {
+                  // Call onEnd() then exit.
+                  onEnd && onEnd();
+                  return;
+                }
+
+                //
                 // Recursively fetch paginated items.
-                if (json.links && json.links.next) {
+                //
+                if ((count === 0 || count > json.data.length)) {
                   dispatch(_fetchAll({
                     endpoint: json.links.next
                   }));
-                }
-                else if ('translations' in model.schema) {
-                  // Fetch translations.
-                  forEach(model.schema.translations, trans => {
-                    logger.log(
-                      'fetchAll translations',
-                      `${trans} for ${resource}`
-                    );
-                    dispatch(_fetchTranslations({
-                      langcode: trans,
-                      filters
-                    }));
-                  });
+                } else {
+                  // Call onNext()
+                  onNext && onNext(json.links.next);
                 }
               });
             }
+            //
+            // Handle a NOT OK response
+            //
             else {
               dispatch(a.failure(
                 `${resp.status}: ${resp.statusText ||
@@ -829,14 +899,20 @@ export const ApiManager = class {
 
             return resp;
           })
-          // Catch network error.
+          //
+          // Catch network error
+          //
           .catch(handleNetworkError(dispatch, resource));
 
         return Promise.all([fetchTime, fetchData])
           .then(values => {
+            //
             // Set the collection updated timestamp.
+            //
             dispatch(a.setTimestamp(resource, values[0]));
+            //
             // Return the fetched data.
+            //
             return values[1];
           })
           .catch(err => {
@@ -844,6 +920,9 @@ export const ApiManager = class {
           });
       }
 
+      //
+      // Make the API call
+      //
       return makeApiCall();
     };
   }
