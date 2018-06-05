@@ -697,6 +697,7 @@ export const ApiManager = class {
     let nextLink;
     let totalFetched = 0;
     let done = false;
+    let replace = options.replace || false;
 
     const getNextLink = () => nextLink;
 
@@ -705,9 +706,11 @@ export const ApiManager = class {
         ...options,
         endpoint: getNextLink(),
         totalFetched,
+        replace,
         onNext: (endpoint, total) => {
           nextLink = endpoint;
           totalFetched = total;
+          replace = false;
         },
         onDone: () => {
           if (options.onDone) {
