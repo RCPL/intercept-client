@@ -1,6 +1,6 @@
 {
   "name": "intercept-client",
-  "version": "1.1.47",
+  "version": "1.1.48",
   "description": "Client library for interacting with the Intercept API.",
   "repository": {
     "type": "git",
