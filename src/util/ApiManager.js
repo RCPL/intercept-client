@@ -486,9 +486,7 @@ export const ApiManager = class {
    *  An object of query param key|value pairs
    */
   static getEndpointLimit(limit) {
-    return limit
-      ? { 'page[limit]': limit }
-      : {};
+    return limit ? { 'page[limit]': limit } : {};
   }
 
   /**
@@ -501,9 +499,7 @@ export const ApiManager = class {
    *  An object of query param key|value pairs
    */
   static getEndpointOffset(offset) {
-    return offset
-      ? { 'page[offset]': offset }
-      : {};
+    return offset ? { 'page[offset]': offset } : {};
   }
 
   /**
@@ -707,7 +703,7 @@ export const ApiManager = class {
       next: this.fetchAll({
         ...options,
         endpoint: getNextLink(),
-        onNext: (endpoint) => {
+        onNext: endpoint => {
           nextLink = endpoint;
         },
         onDone: () => {
@@ -729,11 +725,7 @@ export const ApiManager = class {
     // on successful JSON response, map data to this.EntityModel.import
     // then dispatch success, type, data (transformed data)
     const {
-      backoffFetch,
-      model,
-      resource,
-      getLatestFetch,
-      setLatestFetch
+      backoffFetch, resource, getLatestFetch, setLatestFetch
     } = this;
     const { fetchTimestamp } = this.constructor;
     const { getRequest, getTimestamp } = this.constructor;
@@ -742,17 +734,13 @@ export const ApiManager = class {
     const filters = options.filters || [];
     const include = options.include || [];
     const sort = options.sort || [];
-    const count = options.count || 0
+    const count = options.count || 0;
     const {
-      fields,
-      limit,
-      offset,
-      onNext,
-      onEnd,
+      fields, limit, offset, onNext, onEnd
     } = options;
     const _fetchAll = this.fetchAll.bind(this);
-    const _fetchTranslations = this.fetchTranslations.bind(this);
     let replace = options.replace || false;
+    let totalFetched = 0;
 
     return (dispatch, getState) => {
       const state = getState();
@@ -797,7 +785,6 @@ export const ApiManager = class {
       // Make the actual API call
       //
       function makeApiCall() {
-
         //
         // Get the current timestamp
         // This is referenced later when fetching fresh data, or data changed after this timestamp.
@@ -831,6 +818,8 @@ export const ApiManager = class {
                 const output = {
                   data: [].concat(json.data)
                 };
+
+                totalFetched += output.data.length;
 
                 //
                 // Log network response
@@ -869,20 +858,23 @@ export const ApiManager = class {
 
                 if (!hasMore) {
                   // Call onEnd() then exit.
-                  onEnd && onEnd();
+                  if (onEnd) {
+                    onEnd();
+                  }
                   return;
                 }
 
                 //
                 // Recursively fetch paginated items.
                 //
-                if ((count === 0 || count > json.data.length)) {
+                if (count === 0 || count > totalFetched) {
                   dispatch(_fetchAll({
                     endpoint: json.links.next
                   }));
-                } else {
+                }
+                else if (onNext) {
                   // Call onNext()
-                  onNext && onNext(json.links.next);
+                  onNext(json.links.next);
                 }
               });
             }
