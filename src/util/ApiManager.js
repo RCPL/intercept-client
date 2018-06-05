@@ -435,7 +435,7 @@ export const ApiManager = class {
       null
     );
 
-    return { sort: output };
+    return output === null ? {} : { sort: output };
   }
 
   /**
