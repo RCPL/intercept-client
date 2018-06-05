@@ -1,6 +1,5 @@
 /* eslint prefer-destructuring: "off" */
 const logger = {};
-module.exports = logger;
 export default logger;
 
 logger.canLog = null;
