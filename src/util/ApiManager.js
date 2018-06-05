@@ -872,6 +872,7 @@ export const ApiManager = class {
                 //
                 if (count === 0 || count > totalFetched) {
                   dispatch(_fetchAll({
+                    ...options,
                     endpoint: json.links.next,
                     totalFetched,
                   }));
