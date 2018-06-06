@@ -700,6 +700,7 @@ export const ApiManager = class {
     let replace = options.replace || false;
 
     const getNextLink = () => nextLink;
+    const getDone = () => done;
 
     return {
       next: () => this.fetchAll({
@@ -719,7 +720,7 @@ export const ApiManager = class {
           done = true;
         }
       }),
-      isDone: () => done
+      isDone: () => getDone()
     };
   }
 
