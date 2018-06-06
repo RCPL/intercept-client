@@ -744,7 +744,7 @@ export const ApiManager = class {
     const count = options.count || 0;
     let totalFetched = options.totalFetched || 0;
     const {
-      fields, limit, offset, onNext, onEnd
+      fields, limit, offset, onNext, onDone
     } = options;
     const _fetchAll = this.fetchAll.bind(this);
     let replace = options.replace || false;
@@ -864,9 +864,9 @@ export const ApiManager = class {
                 const hasMore = json.links && json.links.next;
 
                 if (!hasMore) {
-                  // Call onEnd() then exit.
-                  if (onEnd) {
-                    onEnd();
+                  // Call onDone() then exit.
+                  if (onDone) {
+                    onDone();
                   }
                   return;
                 }
