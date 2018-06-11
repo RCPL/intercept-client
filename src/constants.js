@@ -2,6 +2,8 @@ export const NAME = 'intercept';
 
 // Filters
 export const DATE = 'date';
+export const DATE_START = 'date--start';
+export const DATE_END = 'date--end';
 export const KEYWORD = 'keyword';
 
 // Entity Types
