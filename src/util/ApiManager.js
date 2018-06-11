@@ -879,6 +879,7 @@ export const ApiManager = class {
                     ...options,
                     endpoint: json.links.next,
                     totalFetched,
+                    replace,
                   }));
                 }
                 else if (onNext) {
