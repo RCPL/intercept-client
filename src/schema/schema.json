@@ -672,6 +672,9 @@
     "field_room_standard_equipment": {
       "type": "array"
     },
+    "field_reservation_phone_number": {
+      "type": "string"
+    },
     "field_staff_use_only": {
       "type": "boolean"
     },
