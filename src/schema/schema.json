@@ -486,6 +486,11 @@
       "model": "taxonomy_term--audience",
       "multiple": true
     },
+    "field_event_audience_primary": {
+      "type": "relationship",
+      "model": "taxonomy_term--audience",
+      "multiple": false
+    },
     "field_event_recurrence": {
       "type": "relationship",
       "model": "event_recurrence--event_recurrence",
@@ -505,6 +510,11 @@
       "type": "relationship",
       "model": "taxonomy_term--event_type",
       "multiple": true
+    },
+    "field_event_type_primary": {
+      "type": "relationship",
+      "model": "taxonomy_term--event_type",
+      "multiple": false
     },
     "image_primary": {
       "type": "relationship",
