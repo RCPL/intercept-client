@@ -815,7 +815,7 @@ export const ApiManager = class {
                 //
                 // Abort if there's a new request in route.
                 //
-                if (currentFetch !== getLatestFetch()) {
+                if (replace && currentFetch !== getLatestFetch()) {
                   return;
                 }
 

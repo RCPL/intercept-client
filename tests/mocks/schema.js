@@ -859,6 +859,9 @@ const schemaDefinition = {
         revision_translation_affected: {
           type: 'boolean'
         },
+        field_branch_location: {
+          type: 'boolean'
+        },
         path: {
           type: 'object'
         },

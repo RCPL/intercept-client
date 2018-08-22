@@ -468,6 +468,9 @@
     "field_text_teaser": {
       "type": "string"
     },
+    "field_evanced_id": {
+      "type": "string"
+    },
     "registration": {
       "type": "object"
     },
