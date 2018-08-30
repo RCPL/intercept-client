@@ -587,6 +587,9 @@
     "title": {
       "type": "string"
     },
+    "field_location_abbreviation": {
+      "type": "string"
+    },
     "created": {
       "type": "number"
     },
