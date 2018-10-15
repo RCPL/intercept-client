@@ -1177,7 +1177,7 @@ export const ApiManager = class {
       if (saved) {
         assign(endpointParts, { id: uuid });
       }
-      const endpoint = this.getEndpoint(endpointParts);
+      const endpoint = options.endpoint || this.getEndpoint(endpointParts);
 
       const request = getRequest(endpoint, {
         ...options,
