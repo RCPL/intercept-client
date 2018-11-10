@@ -441,6 +441,9 @@
     "field_capacity_max": {
       "type": "integer"
     },
+    "field_waitlist_max": {
+      "type": "integer"
+    },
     "field_date_time": {
       "type": "object"
     },
