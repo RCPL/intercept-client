@@ -15,6 +15,7 @@ import interceptClient from './../src/index';
 
 // Mocks
 import mockState from './mocks/state.json';
+import eventResourceResponse from './__mockData__/responses/node--event/resource/success.json';
 import eventCollectionResponse from './__mockData__/responses/node--event/collection/success.json';
 import eventCollectionResponseWithIncludes from './__mockData__/responses/node--event/collection/withIncludesSuccess.json';
 
@@ -70,6 +71,26 @@ describe('ApiManager', () => {
     }));
   });
 
+  it('can get endpoint for specific resource', () => {
+    expect(testApi.getEndpoint({ id: 'xyz' })).toEqual(url.format({
+      host: '/',
+      pathname: 'jsonapi/node/event/xyz',
+      query: {
+        'fields[node--event]': Object.keys(testModel.schema).join(',')
+      }
+    }));
+  });
+
+  it('can handle undefined id in endpoint for specific resource', () => {
+    expect(testApi.getEndpoint({ id: undefined })).toEqual(url.format({
+      host: '/',
+      pathname: 'jsonapi/node/event',
+      query: {
+        'fields[node--event]': Object.keys(testModel.schema).join(',')
+      }
+    }));
+  });
+
   it('can disable sparse fieldsets', () => {
     expect(testApi.getEndpoint({ fields: null })).toEqual(url.format({
       host: '/',
@@ -106,14 +127,14 @@ describe('ApiManager', () => {
       },
       user: {
         path: 'uid.name'
-      },
+      }
     };
     expect(testApi.getEndpoint({ sort, fields: null })).toEqual(url.format({
       host: '/',
       pathname: 'jsonapi/node/event',
       query: {
         sort: '-created,uid.name'
-      },
+      }
     }));
   });
 
@@ -124,8 +145,8 @@ describe('ApiManager', () => {
       host: '/',
       pathname: 'jsonapi/node/event',
       query: {
-        'page[limit]': limit,
-      },
+        'page[limit]': limit
+      }
     }));
   });
 
@@ -136,8 +157,8 @@ describe('ApiManager', () => {
       host: '/',
       pathname: 'jsonapi/node/event',
       query: {
-        'page[offset]': offset,
-      },
+        'page[offset]': offset
+      }
     }));
   });
 
@@ -148,10 +169,10 @@ describe('ApiManager', () => {
   it('getEndpointInclude', () => {
     expect(ApiManager.getEndpointInclude([])).toEqual({});
     expect(ApiManager.getEndpointInclude(['uid'])).toEqual({
-      include: 'uid',
+      include: 'uid'
     });
     expect(ApiManager.getEndpointInclude(['uid', 'field_event'])).toEqual({
-      include: 'uid,field_event',
+      include: 'uid,field_event'
     });
   });
 
@@ -289,6 +310,33 @@ describe('api actions', () => {
       }
     ];
     expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('dispatches fetch actions for simple resource', () => {
+    fetch.mockResponse(JSON.stringify(eventResourceResponse));
+
+    const expectedActions = [
+      // a.request
+      {
+        type: t.REQUEST,
+        id: '665752a8-0dad-44f2-8d9c-a6893b0f9abb',
+        resource
+      },
+      // a.receive
+      {
+        type: t.RECEIVE,
+        id: '665752a8-0dad-44f2-8d9c-a6893b0f9abb',
+        resource,
+        resp: { data: eventResourceResponse.data }
+      }
+      // a.setTimestamp
+    ];
+    return store
+      .dispatch(testApi.fetchResource('665752a8-0dad-44f2-8d9c-a6893b0f9abb'))
+      .then(() => {
+        const actions = store.getActions();
+        expect(actions).toEqual(expectedActions);
+      });
   });
 
   it('dispatches fetchAll actions for simple collection', () => {

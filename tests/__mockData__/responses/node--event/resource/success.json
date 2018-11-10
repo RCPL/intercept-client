@@ -1,0 +1,194 @@
+{
+  "data": {
+    "type": "node--event",
+    "id": "665752a8-0dad-44f2-8d9c-a6893b0f9abb",
+    "attributes": {
+      "nid": 26,
+      "uuid": "665752a8-0dad-44f2-8d9c-a6893b0f9abb",
+      "vid": 33,
+      "langcode": "en",
+      "revision_timestamp": 1520480168,
+      "revision_log": null,
+      "status": true,
+      "title": "Test Event",
+      "created": 1518655096,
+      "changed": 1520480168,
+      "promote": true,
+      "sticky": false,
+      "default_langcode": true,
+      "revision_translation_affected": true,
+      "path": {
+        "alias": "/event/2018-02-14/test-event",
+        "pid": 6,
+        "langcode": "en"
+      },
+      "field_capacity_max": 40,
+      "field_date_time": {
+        "value": "2018-02-14T21:00:00",
+        "end_value": "2018-02-15T00:30:00"
+      },
+      "field_event_is_template": false,
+      "field_event_register_period": {
+        "value": "2018-02-15T00:38:16",
+        "end_value": "2018-02-15T10:30:00"
+      },
+      "field_has_waitlist": false,
+      "field_must_register": false,
+      "field_text_content": {
+        "value": "<p>A whole lot of content</p>\r\n",
+        "format": "basic_html"
+      },
+      "field_text_intro": {
+        "value": "<p>This is the intro text</p>\r\n",
+        "format": "basic_html"
+      },
+      "field_text_teaser": "This is the teaser text"
+    },
+    "relationships": {
+      "type": {
+        "data": {
+          "type": "node_type--node_type",
+          "id": "09597c12-63f2-47f5-aa2c-6bab3794db70"
+        },
+        "links": {
+          "self":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/type",
+          "related":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/type"
+        }
+      },
+      "revision_uid": {
+        "data": {
+          "type": "user--user",
+          "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+        },
+        "links": {
+          "self":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/revision_uid",
+          "related":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/revision_uid"
+        }
+      },
+      "uid": {
+        "data": {
+          "type": "user--user",
+          "id": "22620c98-cb92-4823-b44f-7e03c78de503"
+        },
+        "links": {
+          "self":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/uid",
+          "related":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/uid"
+        }
+      },
+      "menu_link": {
+        "data": null
+      },
+      "field_event_audience": {
+        "data": [
+          {
+            "type": "taxonomy_term--audience",
+            "id": "61b2c0f8-71e7-4475-9507-00de921c57cb"
+          }
+        ],
+        "links": {
+          "self":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_event_audience",
+          "related":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_event_audience"
+        }
+      },
+      "field_event_recurrence": {
+        "data": null
+      },
+      "field_event_series": {
+        "data": {
+          "type": "node--event_series",
+          "id": "357d1bd7-afab-4ba8-82e1-7764be4690c2"
+        },
+        "links": {
+          "self":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_event_series",
+          "related":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_event_series"
+        }
+      },
+      "field_event_subject_heading": {
+        "data": []
+      },
+      "field_event_tags": {
+        "data": []
+      },
+      "field_event_type": {
+        "data": [
+          {
+            "type": "taxonomy_term--event_type",
+            "id": "a71e1ce1-3c55-4c47-b603-9386dca0dd4d"
+          },
+          {
+            "type": "taxonomy_term--event_type",
+            "id": "5fa86ecf-e15b-4191-a64e-fdbccbb0cc64"
+          }
+        ],
+        "links": {
+          "self":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_event_type",
+          "related":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_event_type"
+        }
+      },
+      "field_image_primary": {
+        "data": {
+          "type": "media--image",
+          "id": "ad85973b-9acc-47d0-b182-d4b426a7a0b0"
+        },
+        "links": {
+          "self":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_image_primary",
+          "related":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_image_primary"
+        }
+      },
+      "field_location": {
+        "data": {
+          "type": "node--location",
+          "id": "5834618d-9260-4e8b-8b3b-1060bf667ea7"
+        },
+        "links": {
+          "self":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_location",
+          "related":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_location"
+        }
+      },
+      "field_room": {
+        "data": {
+          "type": "node--room",
+          "id": "5750513d-8b6a-4076-b926-d752df9d5141"
+        },
+        "links": {
+          "self":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/relationships/field_room",
+          "related":
+            "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb/field_room"
+        }
+      }
+    },
+    "links": {
+      "self":
+        "http://intercept.test/jsonapi/node/event/665752a8-0dad-44f2-8d9c-a6893b0f9abb"
+    }
+  },
+  "jsonapi": {
+    "version": "1.0",
+    "meta": {
+      "links": {
+        "self": "http://jsonapi.org/format/1.0/"
+      }
+    }
+  },
+  "links": {
+    "self":
+      "http://intercept.test/jsonapi/node/event?include=field_image_primary%2Cfield_image_primary.field_media_image%2Cfield_room"
+  }
+}

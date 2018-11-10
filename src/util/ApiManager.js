@@ -319,6 +319,7 @@ export const ApiManager = class {
     this.getRelationshipEndpoint = this.getRelationshipEndpoint.bind(this);
     this.getTimestampEndpoint = this.getTimestampEndpoint.bind(this);
     this.fetchAll = this.fetchAll.bind(this);
+    this.fetchResource = this.fetchResource.bind(this);
     this.fetchTranslations = this.fetchTranslations.bind(this);
     this.sync = this.sync.bind(this);
     this.updateRelationshipsIfNeeded = this.updateRelationshipsIfNeeded.bind(this);
@@ -563,16 +564,20 @@ export const ApiManager = class {
 
     // Generate the path.
     const pathParts = [''];
+
     // Add translation if needed.
     if (options.lang) {
       pathParts.push(options.lang);
     }
+
     // Add the collection specific path parts.
     pathParts.push(this.getEndpointPath());
+
     // If this is resource specific, add the id.
     if (options.id) {
       pathParts.push(options.id);
     }
+
     const pathname = pathParts.join('/');
 
     // Generate query params.
@@ -917,6 +922,129 @@ export const ApiManager = class {
             //
             return values[1];
           })
+          .catch(err => {
+            logger.log(err);
+          });
+      }
+
+      //
+      // Make the API call
+      //
+      return makeApiCall();
+    };
+  }
+
+
+  /**
+   * Fetches a resource collection.
+   * @param {Object} options
+   */
+  fetchResource(uuid, options = {}) {
+    // on successful JSON response, map data to this.EntityModel.import
+    // then dispatch success, type, data (transformed data)
+    const {
+      backoffFetch, resource,
+    } = this;
+    const { getRequest, getTimestamp } = this.constructor;
+
+    const include = options.include || [];
+    const {
+      fields
+    } = options;
+
+    return (dispatch) => {
+      //
+      // Construct and endpoint if one was not supplied
+      //
+      const endpoint =
+        options.endpoint ||
+        this.getEndpoint({
+          include,
+          fields,
+          id: uuid,
+        });
+
+      //
+      // Generate the request object
+      //
+      const request = getRequest(endpoint, options);
+
+      //
+      // Dispatch API collection request action.
+      //
+      dispatch(a.request(resource, uuid));
+      logger.log('network', 'Request', request);
+
+      //
+      // Make the actual API call
+      //
+      function makeApiCall() {
+        //
+        // Fetch the data.
+        //
+        const fetchData = backoffFetch(request, responseHandler, errorHandler)
+          .then(resp => {
+            //
+            // Handle an OK response
+            //
+            if (resp.ok) {
+              resp.json().then(json => {
+                //
+                // Ensure the response data is an Array
+                //
+                const output = {
+                  data: json.data
+                };
+
+                //
+                // Log network response
+                //
+                logger.group('network', 'response');
+                logger.log(
+                  'network',
+                  `Response: ${getTimestamp()} ${resource}`,
+                  json
+                );
+                logger.log('network', output.data);
+                logger.groupEnd('network', 'response');
+
+                //
+                // Process included resources.
+                //
+                if ('included' in json) {
+                  processIncludes(dispatch)(json.included);
+                }
+
+                //
+                // Dispatch Receive action
+                //
+                dispatch(a.receive(output, resource, uuid));
+              });
+            }
+            //
+            // Handle a NOT OK response
+            //
+            else {
+              dispatch(a.failure(
+                `${resp.status}: ${resp.statusText ||
+                    'No status message provided'}`,
+                resource,
+                uuid,
+              ));
+            }
+
+            return resp;
+          })
+          //
+          // Catch network error
+          //
+          .catch(handleNetworkError(dispatch, resource, uuid));
+
+        return Promise.all([fetchData])
+          //
+          // Return the fetched data.
+          //
+          .then(values => values[1])
           .catch(err => {
             logger.log(err);
           });
