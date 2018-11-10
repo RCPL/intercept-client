@@ -708,23 +708,24 @@ export const ApiManager = class {
     const getDone = () => done;
 
     return {
-      next: () => this.fetchAll({
-        ...options,
-        endpoint: getNextLink(),
-        totalFetched,
-        replace,
-        onNext: (endpoint, total) => {
-          nextLink = endpoint;
-          totalFetched = total;
-          replace = false;
-        },
-        onDone: () => {
-          if (options.onDone) {
-            options.onDone();
+      next: () =>
+        this.fetchAll({
+          ...options,
+          endpoint: getNextLink(),
+          totalFetched,
+          replace,
+          onNext: (endpoint, total) => {
+            nextLink = endpoint;
+            totalFetched = total;
+            replace = false;
+          },
+          onDone: () => {
+            if (options.onDone) {
+              options.onDone();
+            }
+            done = true;
           }
-          done = true;
-        }
-      }),
+        }),
       isDone: () => getDone()
     };
   }
@@ -884,7 +885,7 @@ export const ApiManager = class {
                     ...options,
                     endpoint: json.links.next,
                     totalFetched,
-                    replace,
+                    replace
                   }));
                 }
                 else if (onNext) {
@@ -934,7 +935,6 @@ export const ApiManager = class {
     };
   }
 
-
   /**
    * Fetches a resource collection.
    * @param {Object} options
@@ -942,17 +942,13 @@ export const ApiManager = class {
   fetchResource(uuid, options = {}) {
     // on successful JSON response, map data to this.EntityModel.import
     // then dispatch success, type, data (transformed data)
-    const {
-      backoffFetch, resource,
-    } = this;
+    const { backoffFetch, resource } = this;
     const { getRequest, getTimestamp } = this.constructor;
 
     const include = options.include || [];
-    const {
-      fields
-    } = options;
+    const { fields } = options;
 
-    return (dispatch) => {
+    return dispatch => {
       //
       // Construct and endpoint if one was not supplied
       //
@@ -961,7 +957,7 @@ export const ApiManager = class {
         this.getEndpoint({
           include,
           fields,
-          id: uuid,
+          id: uuid
         });
 
       //
@@ -1029,7 +1025,7 @@ export const ApiManager = class {
                 `${resp.status}: ${resp.statusText ||
                     'No status message provided'}`,
                 resource,
-                uuid,
+                uuid
               ));
             }
 
@@ -1040,14 +1036,16 @@ export const ApiManager = class {
           //
           .catch(handleNetworkError(dispatch, resource, uuid));
 
-        return Promise.all([fetchData])
-          //
-          // Return the fetched data.
-          //
-          .then(values => values[1])
-          .catch(err => {
-            logger.log(err);
-          });
+        return (
+          Promise.all([fetchData])
+            //
+            // Return the fetched data.
+            //
+            .then(values => values[1])
+            .catch(err => {
+              logger.log(err);
+            })
+        );
       }
 
       //
@@ -1647,14 +1645,8 @@ export function dataReducer(state = initialDataState, action, mergeStrategy) {
 
   let item = {};
 
-  // If this is a brand new item, just return data.
-  if (action.type === t.ADD) {
-    item.data = data;
-  }
-  else if (id in state === false) {
-    // Exit if we don't have the item.
-    // @todo this would probably fail in cases where we have requested a specific
-    //   item that does not exist in the store yet. Which is not a use case at the moment.
+  // Exit if we the item doesn't already exist and we're trying to do something other than updating.
+  if (id in state === false && [t.ADD, t.RECEIVE].indexOf(action.type) < 0) {
     return state;
   }
 
@@ -1696,21 +1688,32 @@ export function dataReducer(state = initialDataState, action, mergeStrategy) {
       };
       break;
     case t.RECEIVE:
-      // If the item is now dirty, let's not update it again as we will
-      //   lose changes and need to sync again anyway.
-      if (action.resp.data && !item.state.dirty) {
-        // item.data = action.resp.data;
-        item =
-          mergeStrategy === 'mergeNew'
-            ? itemUpdateTimestamps(item, action.resp.data)
-            : itemUpdate(item, action.resp.data);
+      if (id in state === false) {
+        item.data = action.resp.data;
+        item.state = {
+          dirty: false,
+          saved: true,
+          syncing: false,
+          error: null
+        };
       }
-      item.state = {
-        ...item.state,
-        saved: true,
-        syncing: false,
-        error: null
-      };
+      else {
+        // If the item is now dirty, let's not update it again as we will
+        //   lose changes and need to sync again anyway.
+        if (action.resp.data && !item.state.dirty) {
+          // item.data = action.resp.data;
+          item =
+            mergeStrategy === 'mergeNew'
+              ? itemUpdateTimestamps(item, action.resp.data)
+              : itemUpdate(item, action.resp.data);
+        }
+        item.state = {
+          ...item.state,
+          saved: true,
+          syncing: false,
+          error: null
+        };
+      }
       break;
     case t.FAILURE:
       item.state = {

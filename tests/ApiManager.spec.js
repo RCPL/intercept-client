@@ -663,4 +663,82 @@ describe('API Reducers', () => {
     };
     expect(apiReducer(resource)(initialState, action)).toEqual(expectedState);
   });
+
+  it('should handle RECEIVE for new resource', () => {
+    const action = {
+      type: t.RECEIVE,
+      resource,
+      id: 'b',
+      resp: {
+        data: {
+          id: 'b',
+          type: 'node--event',
+          attributes: {
+            uuid: 'b'
+          },
+          relationships: {
+            b: {
+              type: 'media--image',
+              id: 'c'
+            }
+          },
+          links: {
+            self: '...'
+          },
+          meta: {
+            stuff: {}
+          }
+        }
+      }
+    };
+
+    const expectedState = {
+      items: {
+        a: {
+          data: {
+            id: 'a',
+            type: resource
+          },
+          state: {
+            dirty: false,
+            error: null,
+            saved: true,
+            syncing: false
+          }
+        },
+        b: {
+          data: {
+            id: 'b',
+            type: 'node--event',
+            attributes: {
+              uuid: 'b'
+            },
+            relationships: {
+              b: {
+                type: 'media--image',
+                id: 'c'
+              }
+            },
+            links: {
+              self: '...'
+            },
+            meta: {
+              stuff: {}
+            }
+          },
+          state: {
+            dirty: false,
+            error: null,
+            saved: true,
+            syncing: false
+          }
+        },
+      },
+      error: null,
+      syncing: false,
+      updated: null,
+      validating: false
+    };
+    expect(apiReducer(resource)(initialState, action)).toEqual(expectedState);
+  });
 });
